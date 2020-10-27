@@ -2,8 +2,8 @@ package service;
 
 import service.result.GetPersonResult;
 
-public class GetPerson {
-  public GetPerson() {
+public class GetPersonService {
+  public GetPersonService() {
   }
 
   public GetPersonResult retrievePerson() { return new GetPersonResult(); }
