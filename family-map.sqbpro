@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="D:/Users/Josh/Documents/cs-projects/adv-prog/FamilyMapApp/family-map.sqlite" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2335"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="0"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,10:mainauth_token"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">drop table if exists user;
+drop table if exists auth_token;
+drop table if exists person;
+drop table if exists event;
+
+create table user (
+	username varchar(255) not null primary key,
+	password varchar(255) not null,
+	email varchar(255) not null,
+	first_name varchar(255) not null,
+	last_name varchar(255) not null,
+	gender varchar(1) not null,
+	person_id varchar(255) not null,
+	foreign key(person_id) references person(id)
+);
+
+create table auth_token (
+	auth_token varchar(255) not null primary key,
+	username varchar(255) not null,
+	foreign key(username) references user(username)
+);
+
+create table person (
+	id varchar(255) not null primary key,
+	username varchar(255) not null,
+	first_name varchar(255) not null,
+	last_name varchar(255) not null,
+	gender varchar(1) not null,
+	father_id varchar(255),
+	mother_id varchar(255),
+	spouse_id varchar(255),
+	foreign key(username) references user(username),
+	foreign key(father_id) references person(id),
+	foreign key(mother_id) references person(id),
+	foreign key(spouse_id) references person(id)
+);
+
+create table event (
+	id varchar(255) not null primary key,
+	username varchar(255) not null,
+	person_id varchar(255) not null,
+	latitude float not null,
+	longitude float not null,
+	country varchar(255) not null,
+	city varchar(255) not null,
+	event_type varchar(255) not null,
+	year integer not null,
+	foreign key(username) references user(username),
+	foreign key(person_id) references person(id)
+);</sql><current_tab id="0"/></tab_sql></sqlb_project>
