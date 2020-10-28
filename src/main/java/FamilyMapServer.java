@@ -7,21 +7,18 @@ import java.net.InetSocketAddress;
 
 public class FamilyMapServer {
 
-  public void main(String[] args) {
-    int port = Integer.getInteger(args[0]);
+  public static void main(String[] args) {
+    int port = Integer.parseInt(args[0]);
 
     try {
-
       startServer(port);
-
     } catch (IOException e) {
       e.printStackTrace();
     }
 
-
   }
 
-  private void startServer(int port) throws IOException {
+  private static void startServer(int port) throws IOException {
     InetSocketAddress serverAddress = new InetSocketAddress(port);
     HttpServer server = HttpServer.create(serverAddress, 10);
     registerHandlers(server);
@@ -29,10 +26,23 @@ public class FamilyMapServer {
     System.out.println("FamilyMapServer listening on port " + port);
   }
 
-  private void registerHandlers(HttpServer server) {
+  private static void registerHandlers(HttpServer server) {
     server.createContext("/", new FileHandler());
-    server.createContext("/user/register", new RegisterHandler());
-    // Fill with more handlers
+    //server.createContext("/user/register", new RegisterHandler());
+
+    //Handlers to consider:
+    //  RequestHandler
+    //    Top-Level parent handler
+    //    Code to write a Json response
+    //    Other code???
+    //  AuthorizingRequestHandler
+    //    Parent for handlers that require authorization
+    //    Read the authorization header to get the auth_token. Return a 401 if missing or invalid
+    //  PostRequestHandler
+    //    Parent for handlers that handle post requests
+    //    Read the request Json and convert to a Java object
+    //    Other code???
+    //  Others???
   }
 
 }

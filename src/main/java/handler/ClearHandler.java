@@ -5,7 +5,7 @@ import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
 
-public class ClearHandler implements HttpHandler {
+public class ClearHandler extends RequestHandler implements HttpHandler {
   @Override
   public void handle(HttpExchange exchange) throws IOException {
 
