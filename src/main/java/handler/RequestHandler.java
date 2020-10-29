@@ -10,7 +10,6 @@ import java.io.OutputStreamWriter;
 
 public abstract class RequestHandler {
 
-
   public void writeString(String str, OutputStream os) throws IOException {
     OutputStreamWriter sw = new OutputStreamWriter(os);
     BufferedWriter bw = new BufferedWriter(sw);

@@ -22,4 +22,6 @@ public class ErrorResult {
   public void setSuccess(Boolean success) {
     this.success=success;
   }
+
+  // TODO: Write a toJsonString() method that can be overridden
 }
