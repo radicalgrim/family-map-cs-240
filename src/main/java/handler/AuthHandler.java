@@ -1,39 +1,23 @@
 package handler;
 
-public abstract class AuthHandler extends RequestHandler {
-  /*
-  if (reqHeaders.containsKey("Authorization")) {
-    String authToken = reqHeaders.getFirst("Authorization");
-    if (authToken.equals("afj232hj2332")) {
+import com.sun.net.httpserver.Headers;
+import com.sun.net.httpserver.HttpExchange;
 
-      // Extract the JSON string from the HTTP request body
+public abstract class AuthHandler extends PostHandler {
 
-      // Get the request body input stream
-      InputStream reqBody = exchange.getRequestBody();
-
-      // Read JSON string from the input stream
-      String reqData = readString(reqBody);
-
-      // Display/log the request JSON data
-      System.out.println(reqData);
-
-
-      // Claim a route based on the request data
-
-
-      // Start sending the HTTP response to the client, starting with
-      // the status code and any defined headers.
-      exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-
-    } else {
-      // The auth token was invalid somehow, so we return a "not authorized"
-      // status code to the client.
-      exchange.sendResponseHeaders(HttpURLConnection.HTTP_UNAUTHORIZED, 0);
+  public Boolean authorize(HttpExchange exchange) {
+    Headers reqHeaders = exchange.getRequestHeaders();
+    if (reqHeaders.containsKey("Authorization")) {
+      String authToken = reqHeaders.getFirst("Authorization");
+      if (authToken.equals("afj232hj2332")) { // TODO: Implement actual authorization. Maybe access service class?
+        return true;
+      }
+      else {
+        return false;
+      }
     }
-  } else {
-    // We did not get an auth token, so we return a "not authorized"
-    // status code to the client.
-    exchange.sendResponseHeaders(HttpURLConnection.HTTP_UNAUTHORIZED, 0);
+    else {
+      return false;
+    }
   }
-  */
 }

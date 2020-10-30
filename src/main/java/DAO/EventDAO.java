@@ -7,21 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/*
-For the services that don't have requests like get
-person(s) or event(s) they have an authtoken and maybe an id from the
-url that needs to be passed into the service, so while they don't need
-a request object they need to be passed into the service method still,
-probably as method parameters. Clear is fine though, no authtoken or
-parameters specified.
-
-For the DAO's I would pay more attention to what
-the service needs to do, as you are missing some methods and some like
-the delete by username or id are not useful, but you'll probably figure
-those out later.
- */
-
-
 public class EventDAO {
     private final Connection conn;
 

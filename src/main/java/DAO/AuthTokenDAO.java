@@ -2,18 +2,67 @@ package DAO;
 
 import model.AuthToken;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class AuthTokenDAO {
-  public AuthTokenDAO() {
+  private final Connection conn;
+
+  public AuthTokenDAO(Connection conn) {
+    this.conn = conn;
   }
 
-  public Boolean insert(AuthToken token) { return false; }
+  public void insert(AuthToken token) throws DataAccessException {
+    String sql = "INSERT INTO Auth_Token (Auth_Token, Username) " +
+            "VALUES(?,?)";
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+      stmt.setString(1, token.getAuthToken());
+      stmt.setString(2, token.getUsername());
 
-  public Boolean delete(String username) {
-    return false;
+      stmt.executeUpdate();
+
+    } catch (SQLException e) {
+      throw new DataAccessException("Error encountered while inserting into the database");
+    }
   }
 
-  public AuthToken read(String username) {
-    return new AuthToken();
+  public AuthToken find(String username) throws DataAccessException {
+    AuthToken token;
+    ResultSet rs = null;
+    String sql = "SELECT * FROM Auth_Token WHERE Username = ?;";
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+      stmt.setString(1, username);
+      rs = stmt.executeQuery();
+      if (rs.next()) {
+        token = new AuthToken(rs.getString("Auth_Token"), rs.getString("Username"));
+        return token;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw new DataAccessException("Error encountered while finding auth token");
+    } finally {
+      if(rs != null) {
+        try {
+          rs.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
+
+    }
+
+    return null;
   }
 
+  public void delete() throws DataAccessException{
+    String sql = "DELETE FROM Auth_Token";
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+      stmt.execute();
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw new DataAccessException("Error encountered while clearing table");
+    }
+  }
 }

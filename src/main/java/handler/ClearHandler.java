@@ -11,7 +11,6 @@ import java.net.HttpURLConnection;
 
 public class ClearHandler extends RequestHandler implements HttpHandler {
   ClearService service;
-  // ClearRequest request;
   ClearResult result;
 
   public ClearHandler() {

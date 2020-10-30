@@ -1,7 +1,5 @@
 import com.sun.net.httpserver.HttpServer;
-import handler.ClearHandler;
-import handler.FileHandler;
-import handler.RegisterHandler;
+import handler.*;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -30,6 +28,8 @@ public class FamilyMapServer {
   private static void registerHandlers(HttpServer server) {
     server.createContext("/", new FileHandler());
     server.createContext("/clear", new ClearHandler());
+    server.createContext("/load", new LoadHandler());
+    server.createContext("/user/login", new LoginHandler());
 
     //Handlers to consider:
     //  RequestHandler

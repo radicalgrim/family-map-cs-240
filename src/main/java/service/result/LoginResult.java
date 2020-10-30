@@ -8,6 +8,17 @@ public class LoginResult extends ErrorResult {
   public LoginResult() {
   }
 
+  public LoginResult(String message, Boolean success) {
+    super(message, success);
+  }
+
+  public LoginResult(Boolean success, String authToken, String username, String personId) {
+    this.success = success;
+    this.authToken=authToken;
+    this.username=username;
+    this.personId=personId;
+  }
+
   public String getAuthToken() {
     return authToken;
   }
