@@ -69,6 +69,12 @@ public class Database {
         try (Statement stmt = conn.createStatement()){
             String sql = "DELETE FROM Event";
             stmt.executeUpdate(sql);
+            sql = "DELETE FROM Person";
+            stmt.executeUpdate(sql);
+            sql = "DELETE FROM User";
+            stmt.executeUpdate(sql);
+            sql = "DELETE FROM Auth_Token";
+            stmt.executeUpdate(sql);
         } catch (SQLException e) {
             throw new DataAccessException("SQL Error encountered while clearing tables");
         }

@@ -23,27 +23,21 @@ public class ClearHandler extends RequestHandler implements HttpHandler {
     try {
 
       if (exchange.getRequestMethod().toUpperCase().equals("POST")) {
-
-        // TODO: Call the clear service
+        // Call the service
         // Normally would send in a request body here
         service = new ClearService();
         result = service.clear();
-
-
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
       }
       else {
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
       }
 
-
-      // TODO: Send a response body
+      // Send a response body
       OutputStream respBody = exchange.getResponseBody();
-      String respData = result.toString(); // TODO: Fix toString method
+      String respData = JsonSerializer.serialize(result);
       writeString(respData, respBody);
       respBody.close();
-
-
 
     } catch (IOException e) {
       exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);

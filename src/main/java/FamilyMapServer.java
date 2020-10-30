@@ -1,4 +1,5 @@
 import com.sun.net.httpserver.HttpServer;
+import handler.ClearHandler;
 import handler.FileHandler;
 import handler.RegisterHandler;
 
@@ -28,7 +29,7 @@ public class FamilyMapServer {
 
   private static void registerHandlers(HttpServer server) {
     server.createContext("/", new FileHandler());
-    //server.createContext("/user/register", new RegisterHandler());
+    server.createContext("/clear", new ClearHandler());
 
     //Handlers to consider:
     //  RequestHandler

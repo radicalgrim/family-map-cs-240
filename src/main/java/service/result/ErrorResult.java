@@ -7,6 +7,11 @@ public class ErrorResult {
   public ErrorResult() {
   }
 
+  public ErrorResult(String message, Boolean success) {
+    this.message = message;
+    this.success = success;
+  }
+
   public String getMessage() {
     return message;
   }
@@ -24,4 +29,10 @@ public class ErrorResult {
   }
 
   // TODO: Write a toJsonString() method that can be overridden
+  public String toJsonString() {
+
+
+
+    return null;
+  }
 }
