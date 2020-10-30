@@ -12,11 +12,11 @@ public class LoginResult extends ErrorResult {
     super(message, success);
   }
 
-  public LoginResult(Boolean success, String authToken, String username, String personId) {
+  public LoginResult(String authToken, String username, String personId, Boolean success) {
+    this.authToken = authToken;
+    this.username = username;
+    this.personId = personId;
     this.success = success;
-    this.authToken=authToken;
-    this.username=username;
-    this.personId=personId;
   }
 
   public String getAuthToken() {
