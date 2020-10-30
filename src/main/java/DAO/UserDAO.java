@@ -49,7 +49,34 @@ public class UserDAO {
       }
     } catch (SQLException e) {
       e.printStackTrace();
-      throw new DataAccessException("Error encountered while finding event");
+      throw new DataAccessException("Error encountered while finding user");
+    } finally {
+      if(rs != null) {
+        try {
+          rs.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
+
+    }
+    return null;
+  }
+
+  public String findPersonId(String username) throws DAO.DataAccessException {
+    String id;
+    ResultSet rs = null;
+    String sql = "SELECT Person_Id FROM User WHERE Username = ?;";
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+      stmt.setString(1, username);
+      rs = stmt.executeQuery();
+      if (rs.next()) {
+        id = rs.getString("Person_Id");
+        return id;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw new DataAccessException("Error encountered while finding person id");
     } finally {
       if(rs != null) {
         try {

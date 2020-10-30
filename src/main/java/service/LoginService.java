@@ -3,10 +3,13 @@ package service;
 import DAO.AuthTokenDAO;
 import DAO.DataAccessException;
 import DAO.Database;
+import DAO.UserDAO;
+import model.AuthToken;
 import service.request.LoginRequest;
 import service.result.LoginResult;
 
 import java.sql.Connection;
+import java.util.UUID;
 
 public class LoginService {
   public LoginService() {
@@ -15,36 +18,27 @@ public class LoginService {
   public LoginResult login(LoginRequest request) {
 
     Database db = new Database();
+    String uuid = UUID.randomUUID().toString();
+    String personId;
+
     try {
       Connection conn = db.openConnection();
       db.clearTables();
 
+      // TODO: Still encountering error inserting into database
+      // Generate an AuthToken and insert it in the database
+      AuthToken token = new AuthToken(uuid, request.getUsername());
       AuthTokenDAO authTokenDAO = new AuthTokenDAO(conn);
+      authTokenDAO.insert(token);
 
-      // TODO: Figure out how to generate an AuthToken
-
-      /*
-      Request Body:
-{
-	"userName": "susan",		// Non-empty string
-	"password": "mysecret"	// Non-empty string
-}
-
-Success Response Body:
-{
-	"authToken": "cf7a368f",	// Non-empty auth token string
-	"userName": "susan",		// User name passed in with request
-	"personID": "39f9fe46"	// Non-empty string containing the Person ID of the
-//    user’s generated Person object
-“success”:”true”		// Boolean identifier
-}
-       */
+      UserDAO userDAO = new UserDAO(conn);
+      personId = userDAO.findPersonId(request.getUsername());
 
       db.closeConnection(true);
     } catch (DataAccessException e) {
       return new LoginResult(e.getMessage(), false);
     }
 
-    return new LoginResult(true, "", "", "");
+    return new LoginResult(true, uuid, request.getUsername(), personId);
   }
 }

@@ -56,23 +56,3 @@ public class LoginHandler extends PostHandler implements HttpHandler {
   }
 }
 
-/*
-Logs in the user and returns an auth token.
-HTTP Method: POST
-Auth Token Required: No
-
-Request Body:
-{
-	"userName": "susan",		// Non-empty string
-	"password": "mysecret"	// Non-empty string
-}
-
-Success Response Body:
-{
-	"authToken": "cf7a368f",	// Non-empty auth token string
-	"userName": "susan",		// User name passed in with request
-	"personID": "39f9fe46"	// Non-empty string containing the Person ID of the
-//    user’s generated Person object
-“success”:”true”		// Boolean identifier
-}
- */

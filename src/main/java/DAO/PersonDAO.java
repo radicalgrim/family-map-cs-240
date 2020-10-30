@@ -49,7 +49,7 @@ public class PersonDAO {
       }
     } catch (SQLException e) {
       e.printStackTrace();
-      throw new DataAccessException("Error encountered while finding event");
+      throw new DataAccessException("Error encountered while finding person");
     } finally {
       if(rs != null) {
         try {

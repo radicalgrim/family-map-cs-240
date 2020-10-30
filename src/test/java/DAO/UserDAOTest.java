@@ -58,6 +58,19 @@ class UserDAOTest {
   }
 
   @Test
+  public void findPersonIdPass() throws DataAccessException {
+    userDAO.insert(bestUser);
+    String compareTest = userDAO.findPersonId(bestUser.getUsername());
+    assertNotNull(compareTest);
+    assertEquals(bestUser.getPersonId(), compareTest);
+  }
+
+  @Test
+  public void findPersonIdFail() throws DataAccessException {
+    assertNull(userDAO.findPersonId(bestUser.getUsername()));
+  }
+
+  @Test
   public void deleteTest() throws DataAccessException {
     userDAO.insert(bestUser);
     userDAO.delete();

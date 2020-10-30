@@ -27,4 +27,17 @@ public class AuthToken {
   public void setUsername(String username) {
     this.username=username;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == null)
+      return false;
+    if (o instanceof AuthToken) {
+      AuthToken oAuthToken = (AuthToken) o;
+      return oAuthToken.getAuthToken().equals(getAuthToken()) &&
+              oAuthToken.getUsername().equals(getUsername());
+    } else {
+      return false;
+    }
+  }
 }
