@@ -13,6 +13,10 @@ public class User {
   @SerializedName("personID")
   private String personId;
 
+  public User() {
+
+  }
+
   public User(String username, String password, String email, String firstName, String lastName, String gender, String personId) {
     this.username=username;
     this.password=password;

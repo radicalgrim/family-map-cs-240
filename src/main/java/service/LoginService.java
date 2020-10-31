@@ -17,32 +17,41 @@ public class LoginService {
   }
 
   public LoginResult login(LoginRequest request) {
+    String uuid = UUID.randomUUID().toString();
+    User user = new User();
+
     try {
-      String uuid = UUID.randomUUID().toString();
       Database db = new Database();
-      Connection conn = db.openConnection();
-      db.clearTables();
-      // Check the user's password against their username
-      UserDAO userDAO = new UserDAO(conn);
-      User user = userDAO.find(request.getUsername());
-      if (request.getPassword().equals(user.getPassword())) {
-        // If it succeeds then create an AuthToken
-        AuthToken token = new AuthToken(uuid, request.getUsername());
-        // Associate the token with the username
-        AuthTokenDAO authTokenDAO = new AuthTokenDAO(conn);
-        authTokenDAO.insert(token);
-        // TODO: Make sure the same user can have multiple authTokens
-      }
-      else {
+      try {
+
+        Connection conn = db.openConnection();
+        db.clearTables();
+        // Check the user's password against their username
+        UserDAO userDAO = new UserDAO(conn);
+        user = userDAO.find(request.getUsername());
+        if (request.getPassword().equals(user.getPassword())) {
+          // If it succeeds then create an AuthToken
+          AuthToken token = new AuthToken(uuid, request.getUsername());
+          // Associate the token with the username
+          AuthTokenDAO authTokenDAO = new AuthTokenDAO(conn);
+          authTokenDAO.insert(token);
+          // TODO: Make sure the same user can have multiple authTokens
+        } else {
+          db.closeConnection(false);
+          return new LoginResult("Invalid password", false);
+        }
+        db.closeConnection(true);
+
+      } catch (DataAccessException e) {
         db.closeConnection(false);
-        return new LoginResult("Invalid password", false);
+        return new LoginResult(e.getMessage(), false);
       }
-      db.closeConnection(true);
-      // Return the Token, Username, Password, and Success
-      return new LoginResult(uuid, user.getUsername(), user.getPersonId(), true);
+
     } catch (DataAccessException e) {
-      return new LoginResult(e.getMessage(), false);
+      e.printStackTrace();
     }
+    // Return the Token, Username, Password, and Success
+    return new LoginResult(uuid, user.getUsername(), user.getPersonId(), true);
   }
 }
 

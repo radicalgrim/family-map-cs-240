@@ -1,58 +1,61 @@
 package service;
 
 import DAO.*;
-import model.AuthToken;
 import model.Event;
 import model.Person;
 import model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import service.request.LoadRequest;
 
 import java.sql.Connection;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ClearServiceTest {
-  private Database db;
-  private ClearService service;
-  private LoadService load;
-
-  /*
-  private Event bestEvent;
-  private EventDAO eventDAO;
-  private Person bestPerson;
-  private PersonDAO personDAO;
-  private User bestUser;
-  private UserDAO userDAO;
-  private AuthToken bestToken;
-  private AuthTokenDAO authTokenDAO;
-  private final String uuid = UUID.randomUUID().toString();
-   */
+  ClearService clearService;
+  LoadService loadService;
+  LoadRequest loadRequest;
+  User bestUser1;
+  User bestUser2;
+  UserDAO userDAO;
+  Person bestPerson1;
+  Person bestPerson2;
+  PersonDAO personDAO;
+  Event bestEvent1;
+  Event bestEvent2;
+  EventDAO eventDAO;
+  Database db;
 
   @BeforeEach
-  void setUp() throws DataAccessException {
-    load = new LoadService();
-
-    /*
-    db = new Database();
-    bestEvent = new Event("Biking_123A", "Gale", "Gale123A",
+  void setUp() {
+    bestUser1 = new User("radicalGrim", "KilroyWasHere", "josh.reese.is@gmail.com",
+            "Josh", "Reese", "M", "personId1");
+    bestUser2 = new User("vladimirBim", "KilroyWasHere", "josh.reese.is@gmail.com",
+            "Josh", "Reese", "M", "personId2");
+    User[] users = new User[]{bestUser1, bestUser2};
+    bestPerson1 = new Person("personId1", "radicalGrim", "Josh", "Reese",
+            "M", "fatherId", "motherId", "spouseId");
+    bestPerson2 = new Person("personId2", "vladimirBim", "Josh", "Reese",
+            "M", "fatherId", "motherId", "spouseId");
+    Person[] persons = new Person[]{bestPerson1, bestPerson2};
+    bestEvent1 = new Event("Biking_123A", "Gale", "personId1",
             35.9f, 140.1f, "Japan", "Ushiku",
             "Biking_Around", 2016);
-    bestPerson = new Person("personId", "radicalGrim", "Josh", "Reese",
-            "M", "fatherId", "motherId", "spouseId");
-    bestUser = new User("radicalGrim", "KilroyWasHere", "josh.reese.is@gmail.com",
-            "Josh", "Reese", "M", "personId");
-    bestToken = new AuthToken(uuid, "radicalGrim");
-    Connection conn = db.openConnection();
-    db.clearTables();
-    eventDAO = new EventDAO(conn);
-    personDAO = new PersonDAO(conn);
-    userDAO = new UserDAO(conn);
-    authTokenDAO = new AuthTokenDAO(conn);
-    service = new ClearService();
-     */
+    bestEvent2 = new Event("Biking_321A", "Gale", "personId2",
+            35.9f, 140.1f, "Japan", "Ushiku",
+            "Biking_Around", 2016);
+    Event[] events = new Event[]{bestEvent1, bestEvent2};
+
+
+    loadRequest = new LoadRequest();
+    loadRequest.setUsers(users);
+    loadRequest.setPersons(persons);
+    loadRequest.setEvents(events);
+
+    loadService = new LoadService();
+    clearService = new ClearService();
   }
 
   @AfterEach
@@ -61,36 +64,24 @@ class ClearServiceTest {
   }
 
   @Test
-  void clear() throws DataAccessException {
-    /*
-    eventDAO.insert(bestEvent);
-    personDAO.insert(bestPerson);
-    userDAO.insert(bestUser);
-    authTokenDAO.insert(bestToken);
+  void load() throws DataAccessException {
+    loadService.load(loadRequest);
+    clearService.clear();
 
-    service.clear();
+    db = new Database();
+    Connection conn = db.openConnection();
 
-    assertNull(eventDAO.find(bestEvent.getEventID()));
-    assertNull(personDAO.find(bestPerson.getId()));
-    assertNull(userDAO.find(bestUser.getUsername()));
-    assertNull(authTokenDAO.find(bestToken.getUsername()));
-*/
+    userDAO = new UserDAO(conn);
+    assertNull(userDAO.find(bestUser1.getUsername()));
+    assertNull(userDAO.find(bestUser2.getUsername()));
+
+    personDAO = new PersonDAO(conn);
+    assertNull(personDAO.find(bestPerson1.getId()));
+    assertNull(personDAO.find(bestPerson2.getId()));
+
+    eventDAO = new EventDAO(conn);
+    assertNull(eventDAO.find(bestEvent1.getEventID()));
+    assertNull(eventDAO.find(bestEvent2.getEventID()));
+
   }
 }
-
-/*
-2 test cases for each public method found in DAO and Service classes
-
-One positive & one negative or 2 positive test cases
-
-One positive test should test the main usage scenario, the other should test an alternative scenario
-
-Most (if not all) test cases will involve multiple assertions.
-
-Examples:
-  try to log in with a bad password
-  try to find a personID that does not exist
-  pass invalid parameters
-
-Make them unique
-*/
