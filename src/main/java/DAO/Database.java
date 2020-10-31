@@ -70,7 +70,7 @@ public class Database {
             String sql = "DELETE FROM Event; DELETE FROM Person; DELETE FROM User; DELETE FROM Auth_Token";
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
-            throw new DataAccessException("SQL Error encountered while clearing tables: " + e.getMessage()); // TODO: Change this back
+            throw new DataAccessException("SQL Error encountered while clearing tables: " + e.getMessage());
         }
     }
 }

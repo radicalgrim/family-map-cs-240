@@ -12,6 +12,12 @@ public class LoadRequest {
   public LoadRequest() {
   }
 
+  public LoadRequest(User[] users, Person[] persons, Event[] events) {
+    this.users = users;
+    this.persons = persons;
+    this.events = events;
+  }
+
   public User[] getUsers() {
     return users;
   }

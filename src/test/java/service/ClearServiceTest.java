@@ -56,6 +56,8 @@ class ClearServiceTest {
 
     loadService = new LoadService();
     clearService = new ClearService();
+
+    db = new Database();
   }
 
   @AfterEach
@@ -68,7 +70,6 @@ class ClearServiceTest {
     loadService.load(loadRequest);
     clearService.clear();
 
-    db = new Database();
     Connection conn = db.openConnection();
 
     userDAO = new UserDAO(conn);

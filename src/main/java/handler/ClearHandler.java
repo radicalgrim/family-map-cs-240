@@ -18,12 +18,8 @@ public class ClearHandler extends RequestHandler implements HttpHandler {
 
   @Override
   public void handle(HttpExchange exchange) throws IOException {
-
     try {
-
       if (exchange.getRequestMethod().toUpperCase().equals("POST")) {
-        // Call the service
-        // Normally would send in a request body here
         service = new ClearService();
         result = service.clear();
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
@@ -32,7 +28,6 @@ public class ClearHandler extends RequestHandler implements HttpHandler {
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
       }
 
-      // Send a response body
       OutputStream respBody = exchange.getResponseBody();
       String respData = JsonSerializer.serialize(result);
       writeString(respData, respBody);

@@ -1,5 +1,7 @@
 package service.result;
 
+import model.Event;
+
 public class LoginResult extends ErrorResult {
   private String authToken;
   private String username;
@@ -41,5 +43,21 @@ public class LoginResult extends ErrorResult {
 
   public void setPersonId(String personId) {
     this.personId=personId;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == null)
+      return false;
+    if (o instanceof LoginResult) {
+      LoginResult oResult = (LoginResult) o;
+      return oResult.getAuthToken().equals(getAuthToken()) &&
+              oResult.getPersonId().equals(getPersonId()) &&
+              oResult.getUsername().equals(getUsername()) &&
+              oResult.getSuccess().equals(getSuccess()) &&
+              oResult.getMessage().equals(getMessage());
+    } else {
+      return false;
+    }
   }
 }
