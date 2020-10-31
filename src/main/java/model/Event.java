@@ -1,5 +1,7 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Event {
     private String eventID;
     private String associatedUsername;

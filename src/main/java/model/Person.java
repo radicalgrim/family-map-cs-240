@@ -1,13 +1,20 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Person {
+  @SerializedName("personID")
   private String id;
+  @SerializedName("associatedUsername")
   private String username;
   private String firstName;
   private String lastName;
   private String gender;
+  @SerializedName("fatherID")
   private String fatherId;
+  @SerializedName("motherID")
   private String motherId;
+  @SerializedName("spouseId")
   private String spouseId;
 
   public Person(String id, String username, String firstName, String lastName, String gender, String fatherId, String motherId, String spouseId) {

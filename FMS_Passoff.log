@@ -1,50 +1,80 @@
-[Tue Oct 27 21:17:54 MDT 2020] - INFO passoff.ServerTest: 	Setting up Persistence Test...
-[Tue Oct 27 21:17:54 MDT 2020] - INFO client.Proxy: 	Clear called
-[Tue Oct 27 21:17:54 MDT 2020] - INFO client.Client: 	Post without Request Body called
-[Tue Oct 27 21:17:54 MDT 2020] - INFO client.Client: 	Attempting to open connection to server
-[Tue Oct 27 21:17:54 MDT 2020] - INFO client.Client: 	Connection opened to server
-[Tue Oct 27 21:17:54 MDT 2020] - INFO client.Client: 	Setting passoffrequest method to POST
-[Tue Oct 27 21:17:54 MDT 2020] - INFO client.Client: 	Request method set to POST
-[Tue Oct 27 21:17:54 MDT 2020] - INFO client.Client: 	Setting Do Output to true
-[Tue Oct 27 21:17:54 MDT 2020] - INFO client.Client: 	Do Output set to true
-[Tue Oct 27 21:17:54 MDT 2020] - INFO client.Client: 	Connecting to server
-[Tue Oct 27 21:17:56 MDT 2020] - INFO passoff.ServerTest: 	Setting up File Handler Default Test...
-[Tue Oct 27 21:17:56 MDT 2020] - INFO client.Proxy: 	Clear called
-[Tue Oct 27 21:17:56 MDT 2020] - INFO client.Client: 	Post without Request Body called
-[Tue Oct 27 21:17:56 MDT 2020] - INFO client.Client: 	Attempting to open connection to server
-[Tue Oct 27 21:17:56 MDT 2020] - INFO client.Client: 	Connection opened to server
-[Tue Oct 27 21:17:56 MDT 2020] - INFO client.Client: 	Setting passoffrequest method to POST
-[Tue Oct 27 21:17:56 MDT 2020] - INFO client.Client: 	Request method set to POST
-[Tue Oct 27 21:17:56 MDT 2020] - INFO client.Client: 	Setting Do Output to true
-[Tue Oct 27 21:17:56 MDT 2020] - INFO client.Client: 	Do Output set to true
-[Tue Oct 27 21:17:56 MDT 2020] - INFO client.Client: 	Connecting to server
-[Tue Oct 27 21:17:58 MDT 2020] - INFO passoff.ServerTest: 	Setting up Realistic Fill Death Test...
-[Tue Oct 27 21:17:58 MDT 2020] - INFO client.Proxy: 	Clear called
-[Tue Oct 27 21:17:58 MDT 2020] - INFO client.Client: 	Post without Request Body called
-[Tue Oct 27 21:17:58 MDT 2020] - INFO client.Client: 	Attempting to open connection to server
-[Tue Oct 27 21:17:58 MDT 2020] - INFO client.Client: 	Connection opened to server
-[Tue Oct 27 21:17:58 MDT 2020] - INFO client.Client: 	Setting passoffrequest method to POST
-[Tue Oct 27 21:17:58 MDT 2020] - INFO client.Client: 	Request method set to POST
-[Tue Oct 27 21:17:58 MDT 2020] - INFO client.Client: 	Setting Do Output to true
-[Tue Oct 27 21:17:58 MDT 2020] - INFO client.Client: 	Do Output set to true
-[Tue Oct 27 21:17:58 MDT 2020] - INFO client.Client: 	Connecting to server
-[Tue Oct 27 21:18:00 MDT 2020] - INFO passoff.ServerTest: 	Setting up Login Invalid User Test...
-[Tue Oct 27 21:18:00 MDT 2020] - INFO client.Proxy: 	Clear called
-[Tue Oct 27 21:18:00 MDT 2020] - INFO client.Client: 	Post without Request Body called
-[Tue Oct 27 21:18:00 MDT 2020] - INFO client.Client: 	Attempting to open connection to server
-[Tue Oct 27 21:18:00 MDT 2020] - INFO client.Client: 	Connection opened to server
-[Tue Oct 27 21:18:00 MDT 2020] - INFO client.Client: 	Setting passoffrequest method to POST
-[Tue Oct 27 21:18:00 MDT 2020] - INFO client.Client: 	Request method set to POST
-[Tue Oct 27 21:18:00 MDT 2020] - INFO client.Client: 	Setting Do Output to true
-[Tue Oct 27 21:18:00 MDT 2020] - INFO client.Client: 	Do Output set to true
-[Tue Oct 27 21:18:00 MDT 2020] - INFO client.Client: 	Connecting to server
-[Tue Oct 27 21:18:02 MDT 2020] - INFO passoff.ServerTest: 	Setting up Load Valid Info Test...
-[Tue Oct 27 21:18:02 MDT 2020] - INFO client.Proxy: 	Clear called
-[Tue Oct 27 21:18:02 MDT 2020] - INFO client.Client: 	Post without Request Body called
-[Tue Oct 27 21:18:02 MDT 2020] - INFO client.Client: 	Attempting to open connection to server
-[Tue Oct 27 21:18:02 MDT 2020] - INFO client.Client: 	Connection opened to server
-[Tue Oct 27 21:18:02 MDT 2020] - INFO client.Client: 	Setting passoffrequest method to POST
-[Tue Oct 27 21:18:02 MDT 2020] - INFO client.Client: 	Request method set to POST
-[Tue Oct 27 21:18:02 MDT 2020] - INFO client.Client: 	Setting Do Output to true
-[Tue Oct 27 21:18:02 MDT 2020] - INFO client.Client: 	Do Output set to true
-[Tue Oct 27 21:18:02 MDT 2020] - INFO client.Client: 	Connecting to server
+[Fri Oct 30 21:07:04 MDT 2020] - INFO passoff.ServerTest: 	Setting up Persistence Test...
+[Fri Oct 30 21:07:04 MDT 2020] - INFO client.Proxy: 	Clear called
+[Fri Oct 30 21:07:04 MDT 2020] - INFO client.Client: 	Post without Request Body called
+[Fri Oct 30 21:07:04 MDT 2020] - INFO client.Client: 	Attempting to open connection to server
+[Fri Oct 30 21:07:04 MDT 2020] - INFO client.Client: 	Connection opened to server
+[Fri Oct 30 21:07:04 MDT 2020] - INFO client.Client: 	Setting passoffrequest method to POST
+[Fri Oct 30 21:07:04 MDT 2020] - INFO client.Client: 	Request method set to POST
+[Fri Oct 30 21:07:04 MDT 2020] - INFO client.Client: 	Setting Do Output to true
+[Fri Oct 30 21:07:04 MDT 2020] - INFO client.Client: 	Do Output set to true
+[Fri Oct 30 21:07:04 MDT 2020] - INFO client.Client: 	Connecting to server
+[Fri Oct 30 21:07:06 MDT 2020] - INFO passoff.ServerTest: 	Setting up File Handler Default Test...
+[Fri Oct 30 21:07:06 MDT 2020] - INFO client.Proxy: 	Clear called
+[Fri Oct 30 21:07:06 MDT 2020] - INFO client.Client: 	Post without Request Body called
+[Fri Oct 30 21:07:06 MDT 2020] - INFO client.Client: 	Attempting to open connection to server
+[Fri Oct 30 21:07:06 MDT 2020] - INFO client.Client: 	Connection opened to server
+[Fri Oct 30 21:07:06 MDT 2020] - INFO client.Client: 	Setting passoffrequest method to POST
+[Fri Oct 30 21:07:06 MDT 2020] - INFO client.Client: 	Request method set to POST
+[Fri Oct 30 21:07:06 MDT 2020] - INFO client.Client: 	Setting Do Output to true
+[Fri Oct 30 21:07:06 MDT 2020] - INFO client.Client: 	Do Output set to true
+[Fri Oct 30 21:07:06 MDT 2020] - INFO client.Client: 	Connecting to server
+[Fri Oct 30 21:07:08 MDT 2020] - INFO passoff.ServerTest: 	Setting up Realistic Fill Death Test...
+[Fri Oct 30 21:07:08 MDT 2020] - INFO client.Proxy: 	Clear called
+[Fri Oct 30 21:07:08 MDT 2020] - INFO client.Client: 	Post without Request Body called
+[Fri Oct 30 21:07:08 MDT 2020] - INFO client.Client: 	Attempting to open connection to server
+[Fri Oct 30 21:07:08 MDT 2020] - INFO client.Client: 	Connection opened to server
+[Fri Oct 30 21:07:08 MDT 2020] - INFO client.Client: 	Setting passoffrequest method to POST
+[Fri Oct 30 21:07:08 MDT 2020] - INFO client.Client: 	Request method set to POST
+[Fri Oct 30 21:07:08 MDT 2020] - INFO client.Client: 	Setting Do Output to true
+[Fri Oct 30 21:07:08 MDT 2020] - INFO client.Client: 	Do Output set to true
+[Fri Oct 30 21:07:08 MDT 2020] - INFO client.Client: 	Connecting to server
+[Fri Oct 30 21:07:10 MDT 2020] - INFO passoff.ServerTest: 	Setting up Login Invalid User Test...
+[Fri Oct 30 21:07:10 MDT 2020] - INFO client.Proxy: 	Clear called
+[Fri Oct 30 21:07:10 MDT 2020] - INFO client.Client: 	Post without Request Body called
+[Fri Oct 30 21:07:10 MDT 2020] - INFO client.Client: 	Attempting to open connection to server
+[Fri Oct 30 21:07:10 MDT 2020] - INFO client.Client: 	Connection opened to server
+[Fri Oct 30 21:07:10 MDT 2020] - INFO client.Client: 	Setting passoffrequest method to POST
+[Fri Oct 30 21:07:10 MDT 2020] - INFO client.Client: 	Request method set to POST
+[Fri Oct 30 21:07:10 MDT 2020] - INFO client.Client: 	Setting Do Output to true
+[Fri Oct 30 21:07:10 MDT 2020] - INFO client.Client: 	Do Output set to true
+[Fri Oct 30 21:07:10 MDT 2020] - INFO client.Client: 	Connecting to server
+[Fri Oct 30 21:07:12 MDT 2020] - INFO passoff.ServerTest: 	Setting up Load Valid Info Test...
+[Fri Oct 30 21:07:12 MDT 2020] - INFO client.Proxy: 	Clear called
+[Fri Oct 30 21:07:12 MDT 2020] - INFO client.Client: 	Post without Request Body called
+[Fri Oct 30 21:07:12 MDT 2020] - INFO client.Client: 	Attempting to open connection to server
+[Fri Oct 30 21:07:12 MDT 2020] - INFO client.Client: 	Connection opened to server
+[Fri Oct 30 21:07:12 MDT 2020] - INFO client.Client: 	Setting passoffrequest method to POST
+[Fri Oct 30 21:07:12 MDT 2020] - INFO client.Client: 	Request method set to POST
+[Fri Oct 30 21:07:12 MDT 2020] - INFO client.Client: 	Setting Do Output to true
+[Fri Oct 30 21:07:12 MDT 2020] - INFO client.Client: 	Do Output set to true
+[Fri Oct 30 21:07:12 MDT 2020] - INFO client.Client: 	Connecting to server
+[Fri Oct 30 21:07:14 MDT 2020] - INFO passoff.ServerTest: 	Setting up Valid Fill Relationships Test...
+[Fri Oct 30 21:07:14 MDT 2020] - INFO client.Proxy: 	Clear called
+[Fri Oct 30 21:07:14 MDT 2020] - INFO client.Client: 	Post without Request Body called
+[Fri Oct 30 21:07:14 MDT 2020] - INFO client.Client: 	Attempting to open connection to server
+[Fri Oct 30 21:07:14 MDT 2020] - INFO client.Client: 	Connection opened to server
+[Fri Oct 30 21:07:14 MDT 2020] - INFO client.Client: 	Setting passoffrequest method to POST
+[Fri Oct 30 21:07:14 MDT 2020] - INFO client.Client: 	Request method set to POST
+[Fri Oct 30 21:07:14 MDT 2020] - INFO client.Client: 	Setting Do Output to true
+[Fri Oct 30 21:07:14 MDT 2020] - INFO client.Client: 	Do Output set to true
+[Fri Oct 30 21:07:14 MDT 2020] - INFO client.Client: 	Connecting to server
+[Fri Oct 30 21:07:16 MDT 2020] - INFO passoff.ServerTest: 	Setting up Events Bad Auth Token Test...
+[Fri Oct 30 21:07:16 MDT 2020] - INFO client.Proxy: 	Clear called
+[Fri Oct 30 21:07:16 MDT 2020] - INFO client.Client: 	Post without Request Body called
+[Fri Oct 30 21:07:16 MDT 2020] - INFO client.Client: 	Attempting to open connection to server
+[Fri Oct 30 21:07:16 MDT 2020] - INFO client.Client: 	Connection opened to server
+[Fri Oct 30 21:07:16 MDT 2020] - INFO client.Client: 	Setting passoffrequest method to POST
+[Fri Oct 30 21:07:16 MDT 2020] - INFO client.Client: 	Request method set to POST
+[Fri Oct 30 21:07:16 MDT 2020] - INFO client.Client: 	Setting Do Output to true
+[Fri Oct 30 21:07:16 MDT 2020] - INFO client.Client: 	Do Output set to true
+[Fri Oct 30 21:07:16 MDT 2020] - INFO client.Client: 	Connecting to server
+[Fri Oct 30 21:07:18 MDT 2020] - INFO passoff.ServerTest: 	Setting up Clear Test...
+[Fri Oct 30 21:07:18 MDT 2020] - INFO client.Proxy: 	Clear called
+[Fri Oct 30 21:07:18 MDT 2020] - INFO client.Client: 	Post without Request Body called
+[Fri Oct 30 21:07:18 MDT 2020] - INFO client.Client: 	Attempting to open connection to server
+[Fri Oct 30 21:07:18 MDT 2020] - INFO client.Client: 	Connection opened to server
+[Fri Oct 30 21:07:18 MDT 2020] - INFO client.Client: 	Setting passoffrequest method to POST
+[Fri Oct 30 21:07:18 MDT 2020] - INFO client.Client: 	Request method set to POST
+[Fri Oct 30 21:07:18 MDT 2020] - INFO client.Client: 	Setting Do Output to true
+[Fri Oct 30 21:07:18 MDT 2020] - INFO client.Client: 	Do Output set to true
+[Fri Oct 30 21:07:18 MDT 2020] - INFO client.Client: 	Connecting to server

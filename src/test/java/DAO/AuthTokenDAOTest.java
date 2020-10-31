@@ -14,7 +14,7 @@ class AuthTokenDAOTest {
   private Database db;
   private AuthToken bestToken;
   private AuthTokenDAO authTokenDAO;
-  private String uuid = UUID.randomUUID().toString();
+  private final String uuid = UUID.randomUUID().toString();
 
   @BeforeEach
   void setUp() throws DataAccessException {

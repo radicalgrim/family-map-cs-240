@@ -1,12 +1,16 @@
 package model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class User {
+  @SerializedName("userName")
   private String username;
   private String password;
   private String email;
   private String firstName;
   private String lastName;
   private String gender;
+  @SerializedName("personID")
   private String personId;
 
   public User(String username, String password, String email, String firstName, String lastName, String gender, String personId) {

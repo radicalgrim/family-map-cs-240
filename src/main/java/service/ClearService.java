@@ -12,7 +12,7 @@ public class ClearService {
 
   public ClearResult clear() {
     try {
-      Database db=new Database();
+      Database db = new Database();
       try {
         db.openConnection();
         db.clearTables();

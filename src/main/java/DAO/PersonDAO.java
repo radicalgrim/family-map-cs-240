@@ -29,7 +29,7 @@ public class PersonDAO {
 
       stmt.executeUpdate();
     } catch (SQLException e) {
-      throw new DataAccessException("Error encountered while inserting into the database");
+      throw new DataAccessException("Error encountered while inserting a person into the database: " + e.getMessage());
     }
   }
 
