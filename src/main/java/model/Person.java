@@ -17,15 +17,36 @@ public class Person {
   @SerializedName("spouseId")
   private String spouseId;
 
+  public Person() {
+  }
+
+  public Person(String id, String username, String firstName, String lastName, String gender) {
+    this.id = id;
+    this.username = username;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+  }
+
+  public Person(String id, String username, String firstName, String lastName, String gender, String fatherId, String motherId) {
+    this.id = id;
+    this.username = username;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+    this.fatherId = fatherId;
+    this.motherId = motherId;
+  }
+
   public Person(String id, String username, String firstName, String lastName, String gender, String fatherId, String motherId, String spouseId) {
-    this.id=id;
-    this.username=username;
-    this.firstName=firstName;
-    this.lastName=lastName;
-    this.gender=gender;
-    this.fatherId=fatherId;
-    this.motherId=motherId;
-    this.spouseId=spouseId;
+    this.id = id;
+    this.username = username;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+    this.fatherId = fatherId;
+    this.motherId = motherId;
+    this.spouseId = spouseId;
   }
 
   public String getId() {

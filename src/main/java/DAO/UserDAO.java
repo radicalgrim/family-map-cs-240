@@ -63,6 +63,7 @@ public class UserDAO {
     return null;
   }
 
+/*
   public String findPersonId(String username) throws DAO.DataAccessException {
     String id;
     ResultSet rs = null;
@@ -89,6 +90,19 @@ public class UserDAO {
     }
     return null;
   }
+
+
+  public void deletePersonId(String username) throws DataAccessException {
+    String sql = "DELETE PersonId FROM User WHERE Username = ?";
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+      stmt.setString(1, username);
+      stmt.execute();
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw new DataAccessException("Error encountered while clearing table");
+    }
+  }
+ */
 
   public void delete() throws DataAccessException {
     String sql = "DELETE FROM User";
