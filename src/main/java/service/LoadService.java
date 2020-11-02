@@ -29,8 +29,8 @@ public class LoadService {
         for (int i = 0; i < request.getEvents().length; i++) {
           eventDAO.insert(request.getEvents()[i]);
         }
-        db.closeConnection(true);
 
+        db.closeConnection(true);
       } catch (DataAccessException | NullPointerException e) {
         db.closeConnection(false);
         return new LoadResult(e.getMessage(), false);

@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class EventDAO {
     private final Connection conn;
@@ -68,7 +69,42 @@ public class EventDAO {
         return null;
     }
 
-    public void deleteByUsername(String username) throws DataAccessException {
+    public Event[] findUserEvents(String username) throws DataAccessException {
+        Event event;
+        ArrayList<Event> data = new ArrayList<>();
+        ResultSet rs = null;
+        String sql = "SELECT * FROM Event WHERE Username = ?;";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                event = new Event(rs.getString("ID"), rs.getString("Username"),
+                        rs.getString("Person_ID"), rs.getFloat("Latitude"),
+                        rs.getFloat("Longitude"), rs.getString("Country"),
+                        rs.getString("City"), rs.getString("Event_Type"),
+                        rs.getInt("Year"));
+                data.add(event);
+            }
+            if (!data.isEmpty()) {
+                return (Event[]) data.toArray();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Error encountered while finding event");
+        } finally {
+            if(rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+        return null;
+    }
+
+    public void deleteUserEvents(String username) throws DataAccessException {
         String sql = "DELETE FROM Event WHERE Username = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, username);

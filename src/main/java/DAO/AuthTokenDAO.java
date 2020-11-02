@@ -28,33 +28,12 @@ public class AuthTokenDAO {
     }
   }
 
-  /*
-    public void insert(Person person) throws DAO.DataAccessException {
-    String sql = "INSERT INTO Person (Id, Username, First_Name, Last_Name, Gender, Father_Id, Mother_Id, Spouse_Id) " +
-            "VALUES(?,?,?,?,?,?,?,?)";
-    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-      stmt.setString(1, person.getId());
-      stmt.setString(2, person.getUsername());
-      stmt.setString(3, person.getFirstName());
-      stmt.setString(4, person.getLastName());
-      stmt.setString(5, person.getGender());
-      stmt.setString(6, person.getFatherId());
-      stmt.setString(7, person.getMotherId());
-      stmt.setString(8, person.getSpouseId());
-
-      stmt.executeUpdate();
-    } catch (SQLException e) {
-      throw new DataAccessException("Error encountered while inserting into the database");
-    }
-  }
-  */
-
-  public AuthToken find(String username) throws DataAccessException {
+  public AuthToken find(String tokenString) throws DataAccessException {
     AuthToken token;
     ResultSet rs = null;
-    String sql = "SELECT * FROM Auth_Token WHERE Username = ?;";
+    String sql = "SELECT * FROM Auth_Token WHERE Auth_Token = ?;";
     try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-      stmt.setString(1, username);
+      stmt.setString(1, tokenString);
       rs = stmt.executeQuery();
       if (rs.next()) {
         token = new AuthToken(rs.getString("Auth_Token"), rs.getString("Username"));
@@ -76,38 +55,6 @@ public class AuthTokenDAO {
 
     return null;
   }
-
-  /*
-    public Person find(String personId) throws DAO.DataAccessException {
-    Person person;
-    ResultSet rs = null;
-    String sql = "SELECT * FROM Person WHERE Id = ?;";
-    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-      stmt.setString(1, personId);
-      rs = stmt.executeQuery();
-      if (rs.next()) {
-        person = new Person(rs.getString("Id"), rs.getString("Username"),
-                rs.getString("First_Name"), rs.getString("Last_Name"),
-                rs.getString("Gender"), rs.getString("Father_Id"),
-                rs.getString("Mother_Id"), rs.getString("Spouse_Id"));
-        return person;
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-      throw new DataAccessException("Error encountered while finding person");
-    } finally {
-      if(rs != null) {
-        try {
-          rs.close();
-        } catch (SQLException e) {
-          e.printStackTrace();
-        }
-      }
-
-    }
-    return null;
-  }
-  */
 
   public void delete() throws DataAccessException{
     String sql = "DELETE FROM Auth_Token";

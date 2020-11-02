@@ -26,7 +26,7 @@ public abstract class AncestorService {
 
   public void deleteExistingPersonData(Connection conn, String username) throws DataAccessException {
     EventDAO eventDAO = new EventDAO(conn);
-    eventDAO.deleteByUsername(username);
+    eventDAO.deleteUserEvents(username);
     PersonDAO personDAO = new PersonDAO(conn);
     personDAO.deleteByUsername(username);
   }

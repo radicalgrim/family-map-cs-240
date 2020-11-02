@@ -2,10 +2,10 @@ package service.result;
 
 import model.Person;
 
-public class GetAllPersonsResult extends ErrorResult {
+public class PersonResult extends ErrorResult {
   Person[] data;
 
-  public GetAllPersonsResult() {
+  public PersonResult() {
   }
 
   public Person[] getData() {

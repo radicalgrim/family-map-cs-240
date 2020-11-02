@@ -42,11 +42,7 @@ public class LoginHandler extends PostHandler implements HttpHandler {
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
       }
 
-      // Send a response body
-      OutputStream respBody = exchange.getResponseBody();
-      String respData = JsonSerializer.serialize(result);
-      writeString(respData, respBody);
-      respBody.close();
+      makeResponseBody(exchange, result);
 
     } catch (IOException e) {
       exchange.sendResponseHeaders(HttpURLConnection.HTTP_INTERNAL_ERROR, 0);
