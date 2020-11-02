@@ -20,7 +20,7 @@ public class FillHandler extends RequestHandler implements HttpHandler {
 
         String[] fillInfo = decodeFillInfo(exchange);
         service = new FillService();
-        result = service.fill(fillInfo[0], Integer.parseInt(fillInfo[1]));
+        result = service.fill(fillInfo[0], fillInfo[1]);
 
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
       }

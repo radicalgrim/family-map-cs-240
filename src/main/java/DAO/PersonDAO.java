@@ -63,6 +63,17 @@ public class PersonDAO {
     return null;
   }
 
+  public void deleteByUsername(String username) throws DataAccessException {
+    String sql = "DELETE FROM Person WHERE Username = ?";
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+      stmt.setString(1, username);
+      stmt.execute();
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw new DataAccessException("Error encountered while clearing persons from table");
+    }
+  }
+
   public void delete() throws DataAccessException {
     String sql = "DELETE FROM Person";
     try (PreparedStatement stmt = conn.prepareStatement(sql)) {

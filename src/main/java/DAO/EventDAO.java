@@ -46,8 +46,9 @@ public class EventDAO {
             rs = stmt.executeQuery();
             if (rs.next()) {
                 event = new Event(rs.getString("ID"), rs.getString("Username"),
-                        rs.getString("Person_ID"), rs.getFloat("Latitude"), rs.getFloat("Longitude"),
-                        rs.getString("Country"), rs.getString("City"), rs.getString("Event_Type"),
+                        rs.getString("Person_ID"), rs.getFloat("Latitude"),
+                        rs.getFloat("Longitude"), rs.getString("Country"),
+                        rs.getString("City"), rs.getString("Event_Type"),
                         rs.getInt("Year"));
                 return event;
             }
@@ -65,6 +66,17 @@ public class EventDAO {
 
         }
         return null;
+    }
+
+    public void deleteByUsername(String username) throws DataAccessException {
+        String sql = "DELETE FROM Event WHERE Username = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DataAccessException("Error encountered while clearing events from table");
+        }
     }
 
     public void delete() throws DataAccessException {
