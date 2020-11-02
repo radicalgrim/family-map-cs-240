@@ -75,10 +75,10 @@ class LoginServiceTest {
     LoginResult goodResult = new LoginResult("uuid", "radicalGrim", "personId", true);
     compareTest = loginService.login(goodRequest);
 
-    assertNull(goodResult.getMessage());
+    assertNull(compareTest.getMessage());
     assertEquals(goodResult.getSuccess(), compareTest.getSuccess());
     assertEquals(goodResult.getUsername(), compareTest.getUsername());
-    assertNotNull(goodResult.getAuthToken());
+    assertNotNull(compareTest.getAuthToken());
     assertEquals(goodResult.getPersonId(), compareTest.getPersonId());
   }
 }

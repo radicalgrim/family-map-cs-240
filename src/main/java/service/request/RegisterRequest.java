@@ -1,14 +1,26 @@
 package service.request;
 
+import com.google.gson.annotations.SerializedName;
+
 public class RegisterRequest {
+  @SerializedName("userName")
   private String username;
   private String password;
   private String email;
   private String firstName;
   private String lastName;
-  private Character gender;
+  private String gender;
 
   public RegisterRequest() {
+  }
+
+  public RegisterRequest(String username, String password, String email, String firstName, String lastName, String gender) {
+    this.username = username;
+    this.password = password;
+    this.email = email;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
   }
 
   public String getUsername() {
@@ -51,11 +63,11 @@ public class RegisterRequest {
     this.lastName=lastName;
   }
 
-  public Character getGender() {
+  public String getGender() {
     return gender;
   }
 
-  public void setGender(Character gender) {
+  public void setGender(String gender) {
     this.gender=gender;
   }
 }

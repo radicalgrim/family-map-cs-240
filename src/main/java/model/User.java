@@ -14,17 +14,25 @@ public class User {
   private String personId;
 
   public User() {
+  }
 
+  public User(String username, String password, String email, String firstName, String lastName, String gender) {
+    this.username = username;
+    this.password = password;
+    this.email = email;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
   }
 
   public User(String username, String password, String email, String firstName, String lastName, String gender, String personId) {
-    this.username=username;
-    this.password=password;
-    this.email=email;
-    this.firstName=firstName;
-    this.lastName=lastName;
-    this.gender=gender;
-    this.personId=personId;
+    this.username = username;
+    this.password = password;
+    this.email = email;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+    this.personId = personId;
   }
 
 

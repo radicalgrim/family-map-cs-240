@@ -24,7 +24,6 @@ public class LoginService {
     try {
       try {
         Connection conn = db.openConnection();
-        // Check the user's password against their username
         UserDAO userDAO = new UserDAO(conn);
         user = userDAO.find(request.getUsername());
         if (user == null) {
@@ -32,9 +31,7 @@ public class LoginService {
           return new LoginResult("Invalid username", false);
         }
         if (request.getPassword().equals(user.getPassword())) {
-          // If it succeeds then create an AuthToken
           AuthToken token = new AuthToken(uuid, request.getUsername());
-          // Associate the token with the username
           AuthTokenDAO authTokenDAO = new AuthTokenDAO(conn);
           authTokenDAO.insert(token);
           // TODO: Make sure the same user can have multiple authTokens

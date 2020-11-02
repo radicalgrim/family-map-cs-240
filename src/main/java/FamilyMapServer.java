@@ -31,6 +31,7 @@ public class FamilyMapServer {
     server.createContext("/load", new LoadHandler());
     server.createContext("/user/login", new LoginHandler());
     server.createContext("/fill", new FillHandler());
+    server.createContext("/user/register", new RegisterHandler());
 
     //Handlers to consider:
     //  RequestHandler

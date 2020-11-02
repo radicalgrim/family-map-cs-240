@@ -58,9 +58,32 @@ public class UserDAO {
           e.printStackTrace();
         }
       }
-
     }
     return null;
+  }
+
+  public Boolean isUsernameTaken(String username) throws DAO.DataAccessException {
+    ResultSet rs = null;
+    String sql = "SELECT * FROM User WHERE Username = ?;";
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+      stmt.setString(1, username);
+      rs = stmt.executeQuery();
+      if (rs.next()) {
+        return true;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw new DataAccessException("Error encountered while finding user");
+    } finally {
+      if(rs != null) {
+        try {
+          rs.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
+    }
+    return false;
   }
 
   public void delete() throws DataAccessException {

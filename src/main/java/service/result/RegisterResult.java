@@ -8,6 +8,17 @@ public class RegisterResult extends ErrorResult {
   public RegisterResult() {
   }
 
+  public RegisterResult(String message, Boolean success) {
+    super(message, success);
+  }
+
+  public RegisterResult(String authToken, String username, String personId, Boolean success) {
+    this.authToken = authToken;
+    this.username = username;
+    this.personId = personId;
+    this.success = success;
+  }
+
   public String getAuthToken() {
     return authToken;
   }
