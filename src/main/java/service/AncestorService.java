@@ -28,7 +28,7 @@ public abstract class AncestorService {
     EventDAO eventDAO = new EventDAO(conn);
     eventDAO.deleteUserEvents(username);
     PersonDAO personDAO = new PersonDAO(conn);
-    personDAO.deleteByUsername(username);
+    personDAO.deleteUserPersons(username);
   }
 
   public void populateDummyData() {

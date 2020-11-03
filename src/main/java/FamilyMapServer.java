@@ -8,13 +8,11 @@ public class FamilyMapServer {
 
   public static void main(String[] args) {
     int port = Integer.parseInt(args[0]);
-
     try {
       startServer(port);
     } catch (IOException e) {
       e.printStackTrace();
     }
-
   }
 
   private static void startServer(int port) throws IOException {
@@ -33,20 +31,7 @@ public class FamilyMapServer {
     server.createContext("/fill", new FillHandler());
     server.createContext("/user/register", new RegisterHandler());
     server.createContext("/event", new EventHandler());
-
-    //Handlers to consider:
-    //  RequestHandler
-    //    Top-Level parent handler
-    //    Code to write a Json response
-    //    Other code???
-    //  AuthorizingRequestHandler
-    //    Parent for handlers that require authorization
-    //    Read the authorization header to get the auth_token. Return a 401 if missing or invalid
-    //  PostRequestHandler
-    //    Parent for handlers that handle post requests
-    //    Read the request Json and convert to a Java object
-    //    Other code???
-    //  Others???
+    server.createContext("/person", new PersonHandler());
   }
 
 }

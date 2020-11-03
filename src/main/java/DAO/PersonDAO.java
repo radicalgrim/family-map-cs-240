@@ -1,11 +1,13 @@
 package DAO;
 
+import model.Event;
 import model.Person;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class PersonDAO {
   private final Connection conn;
@@ -63,7 +65,45 @@ public class PersonDAO {
     return null;
   }
 
-  public void deleteByUsername(String username) throws DataAccessException {
+  public Person[] findUserPersons(String username) throws DataAccessException {
+    Person person;
+    ArrayList<Person> dataList = new ArrayList<>();
+    ResultSet rs = null;
+    String sql = "SELECT * FROM Person WHERE Username = ?;";
+    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+      stmt.setString(1, username);
+      rs = stmt.executeQuery();
+      while (rs.next()) {
+        person = new Person(rs.getString("Id"), rs.getString("Username"),
+                rs.getString("First_Name"), rs.getString("Last_Name"),
+                rs.getString("Gender"), rs.getString("Father_Id"),
+                rs.getString("Mother_Id"), rs.getString("Spouse_Id"));
+        dataList.add(person);
+      }
+      if (!dataList.isEmpty()) {
+        Person[] dataArray = new Person[dataList.size()];
+        for (int i = 0; i < dataList.size(); i++) {
+          dataArray[i] = dataList.get(i);
+        }
+        return dataArray;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      throw new DataAccessException("Error encountered while finding persons");
+    } finally {
+      if(rs != null) {
+        try {
+          rs.close();
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      }
+
+    }
+    return null;
+  }
+
+  public void deleteUserPersons(String username) throws DataAccessException {
     String sql = "DELETE FROM Person WHERE Username = ?";
     try (PreparedStatement stmt = conn.prepareStatement(sql)) {
       stmt.setString(1, username);

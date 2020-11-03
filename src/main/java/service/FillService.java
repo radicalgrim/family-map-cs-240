@@ -52,7 +52,7 @@ public class FillService extends AncestorService {
       return new FillResult("Invalid input. Please enter a positive number of generations", false);
     }
 
-    return new FillResult("Successfully added " + personCount + " persons, and " + eventCount + " events to the database.", true);
+    return new FillResult("Successfully added " + personCount + " persons and " + eventCount + " events to the database.", true);
   }
 
 }
