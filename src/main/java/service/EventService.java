@@ -30,12 +30,15 @@ public class EventService {
         }
         db.closeConnection(true);
 
+      } catch (DataAccessException e) {
+        db.closeConnection(false);
+        return new EventResult("Error: Internal server error", false);
       } catch (Exception e) {
         db.closeConnection(false);
         return new EventResult(e.getMessage(), false);
       }
     } catch(DataAccessException e) {
-      return new EventResult(e.getMessage(), false);
+      return new EventResult("Error: Internal Server error", false);
     }
 
     return result;
@@ -45,7 +48,7 @@ public class EventService {
     AuthTokenDAO authTokenDAO = new AuthTokenDAO(conn);
     AuthToken authToken = authTokenDAO.find(authTokenString);
     if (authToken == null) {
-      throw new Exception("Invalid auth token");
+      throw new Exception("Error: Invalid auth token");
     }
     return authToken.getUsername();
   }
@@ -55,7 +58,7 @@ public class EventService {
     Event[] data = eventDAO.findUserEvents(username);
 
     if (data == null) {
-      throw new Exception("No events found for given user");
+      throw new Exception("Error: No events found for given user");
     }
 
     return new EventResult(data, true);
@@ -65,10 +68,10 @@ public class EventService {
     EventDAO eventDAO = new EventDAO(conn);
     Event event = eventDAO.find(eventId);
     if (event == null) {
-      throw new Exception("No events found for given user");
+      throw new Exception("Error: No events found for given user");
     }
     if (!event.getUsername().equals(username)) {
-      throw new Exception("Invalid auth token");
+      throw new Exception("Error: Invalid auth token");
     }
     return new EventResult(event.getUsername(), event.getEventID(), event.getPersonID(), event.getLatitude(),
             event.getLongitude(), event.getCountry(), event.getCity(), event.getEventType(), event.getYear(),

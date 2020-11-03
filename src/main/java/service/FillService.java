@@ -27,14 +27,14 @@ public class FillService extends AncestorService {
       try {
         gen = Integer.parseInt(generations);
         if (gen < 0) {
-          return new FillResult("Please enter a positive number of generations", false);
+          return new FillResult("Error: Please enter a positive number of generations", false);
         }
         Connection conn = db.openConnection();
         UserDAO userDAO = new UserDAO(conn);
         User user = userDAO.find(username);
         if (user == null) {
           db.closeConnection(false);
-          return new FillResult("Invalid username", false);
+          return new FillResult("Error: Invalid username", false);
         }
 
         deleteExistingPersonData(conn, user.getUsername());
@@ -44,12 +44,12 @@ public class FillService extends AncestorService {
         db.closeConnection(true);
       } catch (DataAccessException e) {
         db.closeConnection(false);
-        return new FillResult(e.getMessage(), false);
+        return new FillResult("Error: Internal server error", false);
       }
     } catch(DataAccessException e) {
-      return new FillResult(e.getMessage(), false);
+      return new FillResult("Error: Internal server error", false);
     } catch (NumberFormatException e) {
-      return new FillResult("Invalid input. Please enter a positive number of generations", false);
+      return new FillResult("Error: Invalid input. Please enter a positive number of generations", false);
     }
 
     return new FillResult("Successfully added " + personCount + " persons and " + eventCount + " events to the database.", true);

@@ -17,10 +17,10 @@ public class ClearService {
         db.closeConnection(true);
       } catch (DataAccessException e) {
         db.closeConnection(false);
-        return new ClearResult("Internal server error", false);
+        return new ClearResult("Error: Internal server error", false);
       }
     } catch(DataAccessException e) {
-      return new ClearResult("Internal server error", false);
+      return new ClearResult("Error: Internal server error", false);
     }
 
     return new ClearResult("Clear succeeded.", true);

@@ -33,7 +33,7 @@ public class RegisterService extends AncestorService {
         UserDAO userDAO = new UserDAO(conn);
         if (userDAO.find(request.getUsername()) != null) {
           db.closeConnection(false);
-          return new RegisterResult("Username taken", false);
+          return new RegisterResult("Error: Username taken", false);
         }
         else {
           user = new User(request.getUsername(), request.getPassword(), request.getEmail(), request.getFirstName(),
@@ -55,10 +55,10 @@ public class RegisterService extends AncestorService {
 
       } catch (DataAccessException e) {
         db.closeConnection(false);
-        return new RegisterResult(e.getMessage(), false);
+        return new RegisterResult("Error: Internal server error", false);
       }
     } catch(DataAccessException e) {
-      return new RegisterResult(e.getMessage(), false);
+      return new RegisterResult("Error: Internal server error", false);
     }
 
     return new RegisterResult(uuid, user.getUsername(), user.getPersonId(), true);

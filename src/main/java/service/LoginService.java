@@ -29,7 +29,7 @@ public class LoginService {
         user = userDAO.find(request.getUsername());
         if (user == null) {
           db.closeConnection(false);
-          return new LoginResult("Request property missing or has invalid value" /*"Invalid username"*/, false);
+          return new LoginResult("Error: Invalid username", false);
         }
         if (request.getPassword().equals(user.getPassword())) {
           AuthToken token = new AuthToken(uuid, request.getUsername());
@@ -38,17 +38,17 @@ public class LoginService {
         }
         else {
           db.closeConnection(false);
-          return new LoginResult("Request property missing or has invalid value" /*"Invalid password"*/, false);
+          return new LoginResult("Error: Invalid password", false);
         }
         db.closeConnection(true);
 
       } catch (DataAccessException e) {
         db.closeConnection(false);
-        return new LoginResult("Internal server error", false);
+        return new LoginResult("Error: Internal server error", false);
       }
 
     } catch (DataAccessException e) {
-      return new LoginResult("Internal server error", false);
+      return new LoginResult("Error: Internal server error", false);
     }
 
     return new LoginResult(uuid, user.getUsername(), user.getPersonId(), true);

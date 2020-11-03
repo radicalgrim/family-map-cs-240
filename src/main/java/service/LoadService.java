@@ -31,12 +31,15 @@ public class LoadService {
         }
 
         db.closeConnection(true);
-      } catch (DataAccessException | NullPointerException e) {
+      } catch (DataAccessException e) {
         db.closeConnection(false);
-        return new LoadResult(e.getMessage(), false);
+        return new LoadResult("Error: Internal server error", false);
+      } catch (NullPointerException e) {
+        db.closeConnection(false);
+        return new LoadResult("Error: One of the fields was empty", false);
       }
     } catch(DataAccessException e) {
-      return new LoadResult(e.getMessage(), false);
+      return new LoadResult("Error: Internal server error", false);
     }
 
     String message = "Successfully added " + request.getUsers().length + " users, " + request.getPersons().length +

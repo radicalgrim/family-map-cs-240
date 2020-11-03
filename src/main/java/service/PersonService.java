@@ -27,12 +27,15 @@ public class PersonService {
         }
         db.closeConnection(true);
 
+      } catch (DataAccessException e) {
+        db.closeConnection(false);
+        return new PersonResult("Error: Internal server error", false);
       } catch (Exception e) {
         db.closeConnection(false);
         return new PersonResult(e.getMessage(), false);
       }
     } catch(DataAccessException e) {
-      return new PersonResult(e.getMessage(), false);
+      return new PersonResult("Error: Internal server error", false);
     }
 
     return result;
@@ -42,7 +45,7 @@ public class PersonService {
     AuthTokenDAO authTokenDAO = new AuthTokenDAO(conn);
     AuthToken authToken = authTokenDAO.find(authTokenString);
     if (authToken == null) {
-      throw new Exception("Invalid auth token");
+      throw new Exception("Error: Invalid auth token");
     }
     return authToken.getUsername();
   }
@@ -52,7 +55,7 @@ public class PersonService {
     Person[] data = personDAO.findUserPersons(username);
 
     if (data == null) {
-      throw new Exception("No persons found for given user");
+      throw new Exception("Error: No persons found for given user");
     }
 
     return new PersonResult(data, true);
@@ -62,10 +65,10 @@ public class PersonService {
     PersonDAO personDAO = new PersonDAO(conn);
     Person person = personDAO.find(personId);
     if (person == null) {
-      throw new Exception("No persons found for given user");
+      throw new Exception("Error: No persons found for given user");
     }
     if (!person.getUsername().equals(username)) {
-      throw new Exception("Invalid auth token");
+      throw new Exception("Error: Invalid auth token");
     }
 
     // TODO: Optional Id's?
