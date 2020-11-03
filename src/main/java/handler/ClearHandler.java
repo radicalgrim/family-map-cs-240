@@ -22,7 +22,12 @@ public class ClearHandler extends RequestHandler implements HttpHandler {
       if (exchange.getRequestMethod().toUpperCase().equals("POST")) {
         service = new ClearService();
         result = service.clear();
-        exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+        if (result.getSuccess()) {
+          exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+        }
+        else {
+          exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+        }
       }
       else {
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);

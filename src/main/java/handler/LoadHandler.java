@@ -21,18 +21,19 @@ public class LoadHandler extends PostHandler implements HttpHandler {
 
   @Override
   public void handle(HttpExchange exchange) throws IOException {
-
     try {
-
       if (exchange.getRequestMethod().toUpperCase().equals("POST")) {
-
-        // Extract the JSON string from the HTTP request body
         InputStream reqBody = exchange.getRequestBody();
         String reqData = readString(reqBody);
         request = JsonSerializer.deserialize(reqData, LoadRequest.class);
         service = new LoadService();
         result = service.load(request);
-        exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+        if (result.getSuccess()) {
+          exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+        }
+        else {
+          exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+        }
       }
       else {
         exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);

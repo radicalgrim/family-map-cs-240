@@ -27,7 +27,12 @@ public class RegisterHandler extends PostHandler implements HttpHandler {
         request = JsonSerializer.deserialize(reqData, RegisterRequest.class);
         service = new RegisterService();
         result = service.register(request);
-        exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+        if (result.getSuccess()) {
+          exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+        }
+        else {
+          exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+        }
 
       }
       else {

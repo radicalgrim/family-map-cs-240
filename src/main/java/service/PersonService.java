@@ -8,17 +8,15 @@ import service.result.PersonResult;
 import java.sql.Connection;
 
 public class PersonService {
+  PersonResult result;
+
   public PersonService() {
   }
 
   public PersonResult person(String personId, String authTokenString) {
-
     Database db = new Database();
-    PersonResult result;
-
     try {
       try {
-
         Connection conn = db.openConnection();
         String username = findCurrentUser(conn, authTokenString);
         if (personId == null) {

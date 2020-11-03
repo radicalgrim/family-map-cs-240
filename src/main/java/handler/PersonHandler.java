@@ -24,8 +24,12 @@ public class PersonHandler extends RequestHandler implements HttpHandler {
           String personId = decodePersonInfo(exchange);
           service = new PersonService();
           result = service.person(personId, authToken);
-          exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
-
+          if (result.getSuccess()) {
+            exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
+          }
+          else {
+            exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
+          }
         }
         else {
           exchange.sendResponseHeaders(HttpURLConnection.HTTP_UNAUTHORIZED, 0);

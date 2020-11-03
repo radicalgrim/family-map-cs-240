@@ -11,17 +11,15 @@ import service.result.EventResult;
 import java.sql.Connection;
 
 public class EventService {
+  EventResult result;
+
   public EventService() {
   }
 
   public EventResult event(String eventId, String authTokenString) {
-
     Database db = new Database();
-    EventResult result;
-
     try {
       try {
-
         Connection conn = db.openConnection();
         String username = findCurrentUser(conn, authTokenString);
         if (eventId == null) {

@@ -20,15 +20,15 @@ public class FillService extends AncestorService {
   }
 
   public FillResult fill(String username, String generations) {
+    Database db = new Database();
+    personCount = 0;
+    eventCount = 0;
     try {
-      gen = Integer.parseInt(generations);
-      if (gen < 0) {
-        return new FillResult("Please enter a positive number of generations", false);
-      } // TODO: Account for non numbers
-      personCount = 0;
-      eventCount = 0;
-      Database db = new Database();
       try {
+        gen = Integer.parseInt(generations);
+        if (gen < 0) {
+          return new FillResult("Please enter a positive number of generations", false);
+        }
         Connection conn = db.openConnection();
         UserDAO userDAO = new UserDAO(conn);
         User user = userDAO.find(username);
