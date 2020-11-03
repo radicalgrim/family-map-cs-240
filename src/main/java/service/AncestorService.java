@@ -31,7 +31,6 @@ public abstract class AncestorService {
     personDAO.deleteUserPersons(username);
   }
 
-  // TODO: Is this an issue?
   public void populateDummyData() {
     try {
       String content = readFile("json/locations.json");
@@ -113,8 +112,8 @@ public abstract class AncestorService {
   }
 
   public void generateParents(Connection conn, Person child, int gen) throws DataAccessException {
-    Person father = generateParentPerson(conn, child, "m");
-    Person mother = generateParentPerson(conn, child, "f");
+    Person father = generateParentPerson(conn, child, gen, "m");
+    Person mother = generateParentPerson(conn, child, gen, "f");
     generateParentEvents(conn, father, mother, child);
     if (gen > 0) {
       generateParents(conn, father, gen - 1);
@@ -122,15 +121,19 @@ public abstract class AncestorService {
     }
   }
 
-  public Person generateParentPerson(Connection conn, Person child, String gender) throws DataAccessException {
+  public Person generateParentPerson(Connection conn, Person child, int generations, String gender) throws DataAccessException {
     Person parent;
     if (gender.equals("m")) {
       parent = new Person(child.getFatherId(), child.getUsername(), randomMaleName(), child.getLastName(),
-              gender, UUID.randomUUID().toString(), UUID.randomUUID().toString(), child.getMotherId());
+              gender, child.getMotherId());
     }
     else {
       parent = new Person(child.getMotherId(), child.getUsername(), randomFemaleName(), randomSurname(),
-              gender, UUID.randomUUID().toString(), UUID.randomUUID().toString(), child.getFatherId());
+              gender, child.getFatherId());
+    }
+    if (generations != 0) {
+      parent.setFatherId(UUID.randomUUID().toString());
+      parent.setMotherId(UUID.randomUUID().toString());
     }
     PersonDAO personDAO = new PersonDAO(conn);
     personDAO.insert(parent);
@@ -147,7 +150,7 @@ public abstract class AncestorService {
     generateMarriageEvents(conn, father, mother);
   }
 
-  public void generateBirthEvent(Connection conn, Person self, Person child) throws DataAccessException {
+  public void generateBirthEvent(Connection conn, Person self, Person child) throws DataAccessException  {
     /*
     - Parent birth date 13 years or more than child birth date
     - Females no children after 50
@@ -156,7 +159,7 @@ public abstract class AncestorService {
     EventDAO eventDAO = new EventDAO(conn);
     Event birthEventChild = eventDAO.find(child.getId() + "_Birth");
     int upper = birthEventChild.getYear() - 13;
-    int lower = birthEventChild.getYear() - 51;
+    int lower = birthEventChild.getYear() - 50;
     int birthYear = (int) (Math.random() * (upper - lower)) + lower;
 
     Location location = randomLocation();
@@ -194,7 +197,7 @@ public abstract class AncestorService {
 
   public void generateMarriageEvents(Connection conn, Person self, Person spouse) throws DataAccessException {
     /*
-    - Marriage date >= 18
+    - Marriage date >= 13
     - Spouse marriage year and location must match each other
     */
     EventDAO eventDAO = new EventDAO(conn);
@@ -207,16 +210,16 @@ public abstract class AncestorService {
     int upper;
     int lower;
     if (birthEventSelf.getYear() > birthEventSpouse.getYear()) {
-      lower = birthEventSelf.getYear() + 18;
+      lower = birthEventSelf.getYear() + 13;
     }
     else {
-      lower = birthEventSpouse.getYear() + 18;
+      lower = birthEventSpouse.getYear() + 13;
     }
     if (deathEventSelf.getYear() < deathEventSpouse.getYear()) {
-      upper = birthEventSelf.getYear();
+      upper = deathEventSelf.getYear();
     }
     else {
-      upper = birthEventSpouse.getYear();
+      upper = deathEventSpouse.getYear();
     }
     int marriageYear = (int) (Math.random() * (upper - lower)) + lower;
 

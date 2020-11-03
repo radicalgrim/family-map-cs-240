@@ -1,10 +1,13 @@
 package service.result;
 
+import com.google.gson.annotations.SerializedName;
 import model.Event;
 
 public class LoginResult extends ErrorResult {
   private String authToken;
+  @SerializedName("userName")
   private String username;
+  @SerializedName("personID")
   private String personId;
 
   public LoginResult() {

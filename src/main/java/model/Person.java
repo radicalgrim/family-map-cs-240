@@ -14,7 +14,7 @@ public class Person {
   private String fatherId;
   @SerializedName("motherID")
   private String motherId;
-  @SerializedName("spouseId")
+  @SerializedName("spouseID")
   private String spouseId;
 
   public Person() {
@@ -36,6 +36,15 @@ public class Person {
     this.gender = gender;
     this.fatherId = fatherId;
     this.motherId = motherId;
+  }
+
+  public Person(String id, String username, String firstName, String lastName, String gender, String spouseId) {
+    this.id = id;
+    this.username = username;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+    this.spouseId = spouseId;
   }
 
   public Person(String id, String username, String firstName, String lastName, String gender, String fatherId, String motherId, String spouseId) {
