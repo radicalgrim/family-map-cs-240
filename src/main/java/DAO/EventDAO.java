@@ -71,22 +71,26 @@ public class EventDAO {
 
     public Event[] findUserEvents(String username) throws DataAccessException {
         Event event;
-        ArrayList<Event> data = new ArrayList<>();
+        ArrayList<Event> dataList = new ArrayList<>();
         ResultSet rs = null;
         String sql = "SELECT * FROM Event WHERE Username = ?;";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, username);
             rs = stmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 event = new Event(rs.getString("ID"), rs.getString("Username"),
                         rs.getString("Person_ID"), rs.getFloat("Latitude"),
                         rs.getFloat("Longitude"), rs.getString("Country"),
                         rs.getString("City"), rs.getString("Event_Type"),
                         rs.getInt("Year"));
-                data.add(event);
+                dataList.add(event);
             }
-            if (!data.isEmpty()) {
-                return (Event[]) data.toArray();
+            if (!dataList.isEmpty()) {
+                Event[] dataArray = new Event[dataList.size()];
+                for (int i = 0; i < dataList.size(); i++) {
+                    dataArray[i] = dataList.get(i);
+                }
+                return dataArray;
             }
         } catch (SQLException e) {
             e.printStackTrace();

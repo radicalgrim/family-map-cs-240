@@ -51,11 +51,7 @@ class LoadServiceTest {
 
 
 
-    request = new LoadRequest();
-    request.setUsers(users);
-    request.setPersons(persons);
-    request.setEvents(events);
-
+    request = new LoadRequest(users, persons, events);
     service = new LoadService();
   }
 
