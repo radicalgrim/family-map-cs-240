@@ -13,12 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class RegisterServiceTest {
   private static RegisterService registerService;
   private static ClearService clearService;
-  private RegisterRequest request;
-  private RegisterResult result;
-  private RegisterResult compareTest;
 
-  @BeforeEach
-  void setUp() {
+  @BeforeAll
+  static void declare() {
     registerService = new RegisterService();
     clearService = new ClearService();
   }
@@ -30,27 +27,27 @@ class RegisterServiceTest {
 
   @Test
   void registerTest_goodRequest() {
-    request = new RegisterRequest("radicalGrim", "KilroyWasHere", "josh.reese.is@gmail.com",
+    RegisterRequest request = new RegisterRequest("radicalGrim", "KilroyWasHere", "josh.reese.is@gmail.com",
             "Josh", "Reese", "M");
-    compareTest = new RegisterResult("uuid", "radicalGrim", "uuid", true);
-    result = registerService.register(request);
+    RegisterResult compareTest = new RegisterResult("uuid", "radicalGrim", "uuid", true);
+    RegisterResult actual = registerService.register(request);
 
-    assertNull(result.getMessage());
-    assertEquals(compareTest.getSuccess(), result.getSuccess());
-    assertEquals(compareTest.getUsername(), result.getUsername());
-    assertNotNull(result.getAuthToken());
-    assertNotNull(result.getPersonId());
+    assertNull(actual.getMessage());
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
+    assertEquals(compareTest.getUsername(), actual.getUsername());
+    assertNotNull(actual.getAuthToken());
+    assertNotNull(actual.getPersonId());
   }
 
   @Test
   void registerTest_usernameTaken() {
-    request = new RegisterRequest("radicalGrim", "KilroyWasHere", "josh.reese.is@gmail.com",
+    RegisterRequest request = new RegisterRequest("radicalGrim", "KilroyWasHere", "josh.reese.is@gmail.com",
             "Josh", "Reese", "M");
-    compareTest = new RegisterResult("Username taken", false);
-    result = registerService.register(request);
-    result = registerService.register(request);
+    RegisterResult compareTest = new RegisterResult("Error: Username taken", false);
+    registerService.register(request);
+    RegisterResult actual = registerService.register(request);
 
-    assertEquals(compareTest.getMessage(), result.getMessage());
-    assertEquals(compareTest.getSuccess(), result.getSuccess());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
   }
 }

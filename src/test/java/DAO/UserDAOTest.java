@@ -1,6 +1,5 @@
 package DAO;
 
-import model.Event;
 import model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,21 +55,6 @@ class UserDAOTest {
   public void findFail() throws DataAccessException {
     assertNull(userDAO.find(bestUser.getUsername()));
   }
-
-/*
-  @Test
-  public void findPersonIdPass() throws DataAccessException {
-    userDAO.insert(bestUser);
-    String compareTest = userDAO.findPersonId(bestUser.getUsername());
-    assertNotNull(compareTest);
-    assertEquals(bestUser.getPersonId(), compareTest);
-  }
-
-  @Test
-  public void findPersonIdFail() throws DataAccessException {
-    assertNull(userDAO.findPersonId(bestUser.getUsername()));
-  }
- */
 
   @Test
   public void deleteTest() throws DataAccessException {

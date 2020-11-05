@@ -18,7 +18,6 @@ class LoginServiceTest {
   private static LoadService loadService;
   private static LoadRequest loadRequest;
   private static ClearService clearService;
-  private LoginResult compareTest;
 
   @BeforeAll
   static void declare() {
@@ -45,40 +44,40 @@ class LoginServiceTest {
 
   @Test
   void loginTest_badUsername() {
-    LoginRequest badUsernameRequest = new LoginRequest("badUsername", "KilroyWasHere");
-    LoginResult badUsernameResult = new LoginResult("Invalid username", false);
-    compareTest = loginService.login(badUsernameRequest);
+    LoginRequest loginRequest = new LoginRequest("badUsername", "KilroyWasHere");
+    LoginResult compareTest = new LoginResult("Error: Invalid username", false);
+    LoginResult actual = loginService.login(loginRequest);
 
-    assertEquals(badUsernameResult.getMessage(), compareTest.getMessage());
-    assertEquals(badUsernameResult.getSuccess(), compareTest.getSuccess());
-    assertNull(badUsernameResult.getUsername());
-    assertNull(badUsernameResult.getAuthToken());
-    assertNull(badUsernameResult.getPersonId());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
+    assertNull(compareTest.getUsername());
+    assertNull(compareTest.getAuthToken());
+    assertNull(compareTest.getPersonId());
   }
 
   @Test
   void loginTest_badPassword() {
-    LoginRequest badPasswordRequest = new LoginRequest("radicalGrim", "badPassword");
-    LoginResult badPasswordResult = new LoginResult("Invalid password", false);
-    compareTest = loginService.login(badPasswordRequest);
+    LoginRequest loginRequest = new LoginRequest("radicalGrim", "badPassword");
+    LoginResult compareTest = new LoginResult("Error: Invalid password", false);
+    LoginResult actual = loginService.login(loginRequest);
 
-    assertEquals(badPasswordResult.getMessage(), compareTest.getMessage());
-    assertEquals(badPasswordResult.getSuccess(), compareTest.getSuccess());
-    assertNull(badPasswordResult.getUsername());
-    assertNull(badPasswordResult.getAuthToken());
-    assertNull(badPasswordResult.getPersonId());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
+    assertNull(compareTest.getUsername());
+    assertNull(compareTest.getAuthToken());
+    assertNull(compareTest.getPersonId());
   }
 
   @Test
   void loginTest_goodLogin() {
-    LoginRequest goodRequest = new LoginRequest("radicalGrim", "KilroyWasHere");
-    LoginResult goodResult = new LoginResult("uuid", "radicalGrim", "personId", true);
-    compareTest = loginService.login(goodRequest);
+    LoginRequest loginRequest = new LoginRequest("radicalGrim", "KilroyWasHere");
+    LoginResult compareTest = new LoginResult("uuid", "radicalGrim", "personId", true);
+    LoginResult actual = loginService.login(loginRequest);
 
-    assertNull(compareTest.getMessage());
-    assertEquals(goodResult.getSuccess(), compareTest.getSuccess());
-    assertEquals(goodResult.getUsername(), compareTest.getUsername());
-    assertNotNull(compareTest.getAuthToken());
-    assertEquals(goodResult.getPersonId(), compareTest.getPersonId());
+    assertNull(actual.getMessage());
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
+    assertEquals(compareTest.getUsername(), actual.getUsername());
+    assertNotNull(actual.getAuthToken());
+    assertEquals(compareTest.getPersonId(), actual.getPersonId());
   }
 }

@@ -4,85 +4,71 @@ import DAO.*;
 import model.Event;
 import model.Person;
 import model.User;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import service.request.LoadRequest;
+import service.request.LoginRequest;
+import service.result.ClearResult;
+import service.result.LoginResult;
 
-import java.sql.Connection;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ClearServiceTest {
-  ClearService clearService;
-  LoadService loadService;
-  LoadRequest loadRequest;
-  User bestUser1;
-  User bestUser2;
-  UserDAO userDAO;
-  Person bestPerson1;
-  Person bestPerson2;
-  PersonDAO personDAO;
-  Event bestEvent1;
-  Event bestEvent2;
-  EventDAO eventDAO;
-  Database db;
+  private static ClearService clearService;
+  private static LoadService loadService;
+  private static LoadRequest loadRequest;
+  private static LoginService loginService;
+  private static LoginRequest loginRequest;
 
-  @BeforeEach
-  void setUp() {
-    bestUser1 = new User("radicalGrim", "KilroyWasHere", "josh.reese.is@gmail.com",
+  @BeforeAll
+  static void declare() {
+    User sampleUser1 = new User("radicalGrim", "KilroyWasHere", "josh.reese.is@gmail.com",
             "Josh", "Reese", "M", "personId1");
-    bestUser2 = new User("vladimirBim", "KilroyWasHere", "josh.reese.is@gmail.com",
+    User sampleUser2 = new User("otherUser", "KilroyWasHere", "josh.reese.is@gmail.com",
             "Josh", "Reese", "M", "personId2");
-    User[] users = new User[]{bestUser1, bestUser2};
-    bestPerson1 = new Person("personId1", "radicalGrim", "Josh", "Reese",
+    User[] users = new User[] {sampleUser1, sampleUser2};
+    Person samplePerson1 = new Person("personId1", "currentUser", "Josh", "Reese",
             "M", "fatherId", "motherId", "spouseId");
-    bestPerson2 = new Person("personId2", "vladimirBim", "Josh", "Reese",
+    Person samplePerson2 = new Person("personId2", "otherUser", "Josh", "Reese",
             "M", "fatherId", "motherId", "spouseId");
-    Person[] persons = new Person[]{bestPerson1, bestPerson2};
-    bestEvent1 = new Event("Biking_123A", "Gale", "personId1",
+    Person[] persons = new Person[] {samplePerson1, samplePerson2};
+    Event sampleEvent1 = new Event("Biking_123A", "otherUser2", "personId2",
             35.9f, 140.1f, "Japan", "Ushiku",
             "Biking_Around", 2016);
-    bestEvent2 = new Event("Biking_321A", "Gale", "personId2",
+    Event sampleEvent2 = new Event("Biking_321A", "otherUser2", "personId2",
             35.9f, 140.1f, "Japan", "Ushiku",
             "Biking_Around", 2016);
-    Event[] events = new Event[]{bestEvent1, bestEvent2};
+    Event sampleEvent3 = new Event("RG_Birth", "currentUser", "personId1",
+            35.9f, 140.1f, "Japan", "Ushiku",
+            "Biking_Around", 1993);
+    Event sampleEvent4 = new Event("RG_Death", "currentUser", "personId1",
+            35.9f, 140.1f, "Japan", "Ushiku",
+            "Biking_Around", 2070);
+    Event[] events = new Event[] {sampleEvent1, sampleEvent2, sampleEvent3, sampleEvent4};
 
-
-    loadRequest = new LoadRequest();
-    loadRequest.setUsers(users);
-    loadRequest.setPersons(persons);
-    loadRequest.setEvents(events);
-
+    loadRequest = new LoadRequest(users, persons, events);
+    loginRequest = new LoginRequest("radicalGrim", "KilroyWasHere");
     loadService = new LoadService();
     clearService = new ClearService();
+    loginService = new LoginService();
 
-    db = new Database();
-  }
-
-  @AfterEach
-  void tearDown() throws DataAccessException {
-    db.closeConnection(false);
   }
 
   @Test
-  void load() throws DataAccessException {
+  void clearTest() {
     loadService.load(loadRequest);
-    clearService.clear();
+    ClearResult compareTest = new ClearResult("Clear succeeded.", true);
+    ClearResult actual = clearService.clear();
 
-    Connection conn = db.openConnection();
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
 
-    userDAO = new UserDAO(conn);
-    assertNull(userDAO.find(bestUser1.getUsername()));
-    assertNull(userDAO.find(bestUser2.getUsername()));
+    loginService.login(loginRequest);
 
-    personDAO = new PersonDAO(conn);
-    assertNull(personDAO.find(bestPerson1.getId()));
-    assertNull(personDAO.find(bestPerson2.getId()));
+    LoginResult loginCompareTest = new LoginResult("Error: Invalid username", false);
+    LoginResult loginActual = loginService.login(loginRequest);
 
-    eventDAO = new EventDAO(conn);
-    assertNull(eventDAO.find(bestEvent1.getEventID()));
-    assertNull(eventDAO.find(bestEvent2.getEventID()));
-
+    assertEquals(loginCompareTest.getSuccess(), loginActual.getSuccess());
+    assertEquals(loginCompareTest.getMessage(), loginActual.getMessage());
   }
 }

@@ -12,14 +12,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AuthTokenDAOTest {
   private Database db;
-  private AuthToken bestToken;
+  private AuthToken sampleToken;
   private AuthTokenDAO authTokenDAO;
   private final String uuid = UUID.randomUUID().toString();
 
   @BeforeEach
   void setUp() throws DataAccessException {
     db = new Database();
-    bestToken = new AuthToken(uuid, "radicalGrim");
+    sampleToken = new AuthToken(uuid, "radicalGrim");
     Connection conn = db.getConnection();
     db.clearTables();
     authTokenDAO = new AuthTokenDAO(conn);
@@ -32,35 +32,35 @@ class AuthTokenDAOTest {
 
   @Test
   void insertPass() throws DataAccessException {
-    authTokenDAO.insert(bestToken);
-    AuthToken compareTest = authTokenDAO.find(bestToken.getUsername());
+    authTokenDAO.insert(sampleToken);
+    AuthToken compareTest = authTokenDAO.find(sampleToken.getAuthToken());
     assertNotNull(compareTest);
-    assertEquals(bestToken, compareTest);
+    assertEquals(sampleToken, compareTest);
   }
 
   @Test
   void insertFail() throws DataAccessException {
-    authTokenDAO.insert(bestToken);
-    assertThrows(DataAccessException.class, ()-> authTokenDAO.insert(bestToken));
+    authTokenDAO.insert(sampleToken);
+    assertThrows(DataAccessException.class, ()-> authTokenDAO.insert(sampleToken));
   }
 
   @Test
   void findPass() throws DataAccessException {
-    authTokenDAO.insert(bestToken);
-    AuthToken compareTest = authTokenDAO.find(bestToken.getUsername());
+    authTokenDAO.insert(sampleToken);
+    AuthToken compareTest = authTokenDAO.find(sampleToken.getAuthToken());
     assertNotNull(compareTest);
-    assertEquals(bestToken, compareTest);
+    assertEquals(sampleToken, compareTest);
   }
 
   @Test
   void findFail() throws DataAccessException {
-    assertNull(authTokenDAO.find(bestToken.getUsername()));
+    assertNull(authTokenDAO.find(sampleToken.getAuthToken()));
   }
 
   @Test
   void deleteTest() throws DataAccessException {
-    authTokenDAO.insert(bestToken);
+    authTokenDAO.insert(sampleToken);
     authTokenDAO.delete();
-    assertNull(authTokenDAO.find(bestToken.getUsername()));
+    assertNull(authTokenDAO.find(sampleToken.getAuthToken()));
   }
 }

@@ -1,83 +1,70 @@
 package service;
 
-import DAO.*;
 import model.Event;
 import model.Person;
 import model.User;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.request.LoadRequest;
+import service.request.LoginRequest;
 import service.result.LoadResult;
 
-import java.sql.Connection;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LoadServiceTest {
-  LoadService service;
-  LoadRequest request;
-  LoadResult result;
-  User bestUser1;
-  User bestUser2;
-  UserDAO userDAO;
-  Person bestPerson1;
-  Person bestPerson2;
-  PersonDAO personDAO;
-  Event bestEvent1;
-  Event bestEvent2;
-  EventDAO eventDAO;
-  Database db;
+  private static LoadService loadService;
+  private static User[] users;
+  private static Person[] persons;
+  private static Event[] events;
 
-  @BeforeEach
-  void setUp() {
-    bestUser1 = new User("radicalGrim", "KilroyWasHere", "josh.reese.is@gmail.com",
+  @BeforeAll
+  static void declare() {
+    User sampleUser1 = new User("currentUser", "KilroyWasHere", "josh.reese.is@gmail.com",
             "Josh", "Reese", "M", "personId1");
-    bestUser2 = new User("vladimirBim", "KilroyWasHere", "josh.reese.is@gmail.com",
+    User sampleUser2 = new User("otherUser", "KilroyWasHere", "josh.reese.is@gmail.com",
             "Josh", "Reese", "M", "personId2");
-    User[] users = new User[] {bestUser1, bestUser2};
-    bestPerson1 = new Person("personId1", "radicalGrim", "Josh", "Reese",
+    users = new User[] {sampleUser1, sampleUser2};
+    Person samplePerson1 = new Person("personId1", "currentUser", "Josh", "Reese",
             "M", "fatherId", "motherId", "spouseId");
-    bestPerson2 = new Person("personId2", "vladimirBim", "Josh", "Reese",
+    Person samplePerson2 = new Person("personId2", "otherUser", "Josh", "Reese",
             "M", "fatherId", "motherId", "spouseId");
-    Person[] persons = new Person[] {bestPerson1, bestPerson2};
-    bestEvent1 = new Event("Biking_123A", "Gale", "personId1",
+    persons = new Person[] {samplePerson1, samplePerson2};
+    Event sampleEvent1 = new Event("Biking_123A", "otherUser2", "personId2",
             35.9f, 140.1f, "Japan", "Ushiku",
             "Biking_Around", 2016);
-    bestEvent2 = new Event("Biking_321A", "Gale", "personId2",
+    Event sampleEvent2 = new Event("Biking_321A", "otherUser2", "personId2",
             35.9f, 140.1f, "Japan", "Ushiku",
             "Biking_Around", 2016);
-    Event[] events = new Event[] {bestEvent1, bestEvent2};
+    Event sampleEvent3 = new Event("RG_Birth", "currentUser", "personId1",
+            35.9f, 140.1f, "Japan", "Ushiku",
+            "Biking_Around", 1993);
+    Event sampleEvent4 = new Event("RG_Death", "currentUser", "personId1",
+            35.9f, 140.1f, "Japan", "Ushiku",
+            "Biking_Around", 2070);
+    events = new Event[] {sampleEvent1, sampleEvent2, sampleEvent3, sampleEvent4};
 
-
-
-    request = new LoadRequest(users, persons, events);
-    service = new LoadService();
-  }
-
-  @AfterEach
-  void tearDown() throws DataAccessException {
-    db.closeConnection(false);
+    loadService = new LoadService();
   }
 
   @Test
-  void load() throws DataAccessException {
-    result = service.load(request);
+  void loadTest_validLoad() {
+    LoadResult compareTest = new LoadResult("Successfully added 2 users, 2 persons, and 4 events to the database.", true);
+    LoadRequest loadRequest = new LoadRequest(users, persons, events);
+    LoadResult actual = loadService.load(loadRequest);
 
-    db = new Database();
-    Connection conn = db.openConnection();
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
+  }
 
-    userDAO = new UserDAO(conn);
-    assertNotNull(userDAO.find(bestUser1.getUsername()));
-    assertNotNull(userDAO.find(bestUser2.getUsername()));
+  @Test
+  void loadTest_emptyParameter() {
+    LoadResult compareTest = new LoadResult("Error: One of the fields was empty" , false);
+    LoadRequest loadRequest = new LoadRequest(users, persons, null);
+    LoadResult actual = loadService.load(loadRequest);
 
-    personDAO = new PersonDAO(conn);
-    assertNotNull(personDAO.find(bestPerson1.getId()));
-    assertNotNull(personDAO.find(bestPerson2.getId()));
-
-    eventDAO = new EventDAO(conn);
-    assertNotNull(eventDAO.find(bestEvent1.getEventID()));
-    assertNotNull(eventDAO.find(bestEvent2.getEventID()));
-
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
   }
 }

@@ -71,8 +71,6 @@ public class PersonService {
       throw new Exception("Error: Invalid auth token");
     }
 
-    // TODO: Optional Id's?
-
     return new PersonResult(person.getUsername(), person.getId(), person.getFirstName(), person.getLastName(),
             person.getGender(), person.getFatherId(), person.getMotherId(), person.getSpouseId(), true);
   }

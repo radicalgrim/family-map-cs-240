@@ -3,20 +3,18 @@ package service;
 import model.Event;
 import model.Person;
 import model.User;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import service.request.LoadRequest;
 import service.request.LoginRequest;
-import service.result.EventResult;
+import service.result.PersonResult;
 import service.result.LoginResult;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EventServiceTest {
-  private static EventService eventService;
-  private static Event[] myEvents;
+class PersonServiceTest {
+  private static PersonService personService;
+  private static Person[] myPersons;
   private static String uuidCurrentUser;
   private static String uuidOtherUser;
 
@@ -45,7 +43,7 @@ class EventServiceTest {
             35.9f, 140.1f, "Japan", "Ushiku",
             "Biking_Around", 2070);
     Event[] events = new Event[] {sampleEvent1, sampleEvent2, sampleEvent3, sampleEvent4};
-    myEvents = new Event[] {sampleEvent3, sampleEvent4};
+    myPersons = new Person[] {samplePerson1, samplePerson2};
 
     LoadRequest loadRequest = new LoadRequest(users, persons, events);
     LoadService loadService = new LoadService();
@@ -60,65 +58,51 @@ class EventServiceTest {
     loginResult = loginService.login(loginRequest);
     uuidOtherUser = loginResult.getAuthToken();
 
-    eventService = new EventService();
+    personService = new PersonService();
 
   }
 
   @Test
-  void eventTest_badAuthToken() {
-    EventResult compareTest = new EventResult("Error: Invalid auth token", false);
-    EventResult actual = eventService.event(null, "BlahBlah");
+  void personTest_badAuthToken() {
+    PersonResult compareTest = new PersonResult("Error: Invalid auth token", false);
+    PersonResult actual = personService.person(null, "BlahBlah");
 
     assertEquals(compareTest.getMessage(), actual.getMessage());
     assertEquals(compareTest.getSuccess(), actual.getSuccess());
   }
 
   @Test
-  void eventTest_mismatchedAuthToken() {
-    EventResult compareTest = new EventResult("Error: Invalid auth token", false);
-    EventResult actual = eventService.event("Biking_123A", uuidCurrentUser);
+  void personTest_mismatchedAuthToken() {
+    PersonResult compareTest = new PersonResult("Error: Invalid auth token", false);
+    PersonResult actual = personService.person("personId2", uuidCurrentUser);
 
     assertEquals(compareTest.getMessage(), actual.getMessage());
     assertEquals(compareTest.getSuccess(), actual.getSuccess());
   }
 
   @Test
-  void eventTest_goodAuthToken_noEvents() {
-    EventResult compareTest = new EventResult("Error: No events found for given user", false);
-    EventResult actual = eventService.event(null, uuidOtherUser);
-
-    assertEquals(compareTest.getMessage(), actual.getMessage());
-    assertEquals(compareTest.getSuccess(), actual.getSuccess());
-  }
-
-  @Test
-  void eventTest_singleEvent_goodRequest() {
-    EventResult compareTest = new EventResult("currentUser", "RG_Birth", "personId1",
-            35.9f, 140.1f, "Japan", "Ushiku", "Biking_Around", 1993,
-            true);
-    EventResult actual = eventService.event("RG_Birth", uuidCurrentUser);
+  void PersonTest_singlePerson_goodRequest() {
+    PersonResult compareTest = new PersonResult("currentUser", "personId1", "Josh",
+            "Reese", "M", "fatherId", "motherId", "spouseId", true);
+    PersonResult actual = personService.person("personId1", uuidCurrentUser);
 
     assertEquals(compareTest.getAssociatedUsername(), actual.getAssociatedUsername());
-    assertEquals(compareTest.getEventID(), actual.getEventID());
     assertEquals(compareTest.getPersonID(), actual.getPersonID());
-    assertEquals(compareTest.getLatitude(), actual.getLatitude());
-    assertEquals(compareTest.getLongitude(), actual.getLongitude());
-    assertEquals(compareTest.getCountry(), actual.getCountry());
-    assertEquals(compareTest.getCity(), actual.getCity());
-    assertEquals(compareTest.getEventType(), actual.getEventType());
-    assertEquals(compareTest.getYear(), actual.getYear());
+    assertEquals(compareTest.getFirstName(), actual.getFirstName());
+    assertEquals(compareTest.getLastName(), actual.getLastName());
+    assertEquals(compareTest.getGender(), actual.getGender());
+    assertEquals(compareTest.getFatherID(), actual.getFatherID());
+    assertEquals(compareTest.getMotherID(), actual.getMotherID());
+    assertEquals(compareTest.getSpouseID(), actual.getSpouseID());
     assertEquals(compareTest.getSuccess(), actual.getSuccess());
   }
 
   @Test
-  void eventTest_allEvents_goodRequest() {
-    EventResult compareTest = new EventResult(myEvents, true);
-    EventResult actual = eventService.event(null, uuidCurrentUser);
+  void PersonTest_allPersons_goodRequest() {
+    PersonResult compareTest = new PersonResult(myPersons, true);
+    PersonResult actual = personService.person(null, uuidCurrentUser);
 
-    assertEquals(myEvents[0], actual.getData()[0]);
-    assertEquals(myEvents[1], actual.getData()[1]);
+    assertEquals(myPersons[0], actual.getData()[0]);
     assertEquals(compareTest.getSuccess(), actual.getSuccess());
   }
-
-
 }

@@ -17,13 +17,12 @@ class FillServiceTest {
   private static LoadService loadService;
   private static LoadRequest loadRequest;
   private static ClearService clearService;
-  private FillResult compareTest;
 
   @BeforeAll
   static void declare() {
-    User bestUser = new User("radicalGrim", "KilroyWasHere", "josh.reese.is@gmail.com",
+    User sampleUser = new User("radicalGrim", "KilroyWasHere", "josh.reese.is@gmail.com",
             "Josh", "Reese", "M", "personId");
-    User[] users = new User[]{bestUser};
+    User[] users = new User[]{sampleUser};
     Person[] persons = new Person[]{};
     Event[] events = new Event[]{};
     fillService = new FillService();
@@ -44,70 +43,70 @@ class FillServiceTest {
 
   @Test
   void fillTest_invalidUsername() {
-    FillResult result = new FillResult("Invalid username", false);
-    compareTest = fillService.fill("badUsername", "4");
+    FillResult compareTest = new FillResult("Error: Invalid username", false);
+    FillResult actual = fillService.fill("badUsername", "4");
 
-    assertEquals(result.getSuccess(), compareTest.getSuccess());
-    assertEquals(result.getMessage(), compareTest.getMessage());
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
   }
 
   @Test
   void fillTest_nonNumberGeneration() {
-    FillResult result = new FillResult("Invalid input. Please enter a positive number of generations", false);
-    compareTest = fillService.fill("radicalGrim", "h");
+    FillResult compareTest = new FillResult("Error: Invalid input. Please enter a positive number of generations", false);
+    FillResult actual = fillService.fill("radicalGrim", "h");
 
-    assertEquals(result.getSuccess(), compareTest.getSuccess());
-    assertEquals(result.getMessage(), compareTest.getMessage());
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
   }
 
   @Test
   void fillTest_negativeGeneration() {
-    FillResult result = new FillResult("Please enter a positive number of generations", false);
-    compareTest = fillService.fill("radicalGrim", "-1");
+    FillResult compareTest = new FillResult("Error: Please enter a positive number of generations", false);
+    FillResult actual = fillService.fill("radicalGrim", "-1");
 
-    assertEquals(result.getSuccess(), compareTest.getSuccess());
-    assertEquals(result.getMessage(), compareTest.getMessage());
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
   }
 
   @Test
   void fillTest_zeroGenerations() {
-    FillResult result = new FillResult("Successfully added 1 persons, and 1 events to the database.", true);
-    compareTest = fillService.fill("radicalGrim", "0");
+    FillResult compareTest = new FillResult("Successfully added 1 persons and 1 events to the database.", true);
+    FillResult actual = fillService.fill("radicalGrim", "0");
 
-    assertEquals(result.getSuccess(), compareTest.getSuccess());
-    assertEquals(result.getMessage(), compareTest.getMessage());
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
   }
 
   @Test
   void fillTest_oneGeneration() {
-    FillResult result = new FillResult("Successfully added 3 persons, and 7 events to the database.", true);
-    compareTest = fillService.fill("radicalGrim", "1");
+    FillResult compareTest = new FillResult("Successfully added 3 persons and 7 events to the database.", true);
+    FillResult actual = fillService.fill("radicalGrim", "1");
 
-    assertEquals(result.getMessage(), compareTest.getMessage());
-    assertEquals(result.getSuccess(), compareTest.getSuccess());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
   }
 
   @Test
   void fillTest_multipleGenerations() {
-    FillResult result = new FillResult("Successfully added 31 persons, and 91 events to the database.", true);
-    compareTest = fillService.fill("radicalGrim", "4");
+    FillResult compareTest = new FillResult("Successfully added 31 persons and 91 events to the database.", true);
+    FillResult actual = fillService.fill("radicalGrim", "4");
 
-    assertEquals(result.getMessage(), compareTest.getMessage());
-    assertEquals(result.getSuccess(), compareTest.getSuccess());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
   }
 
   @Test
   void fillTest_chainedRequests() {
-    FillResult result = new FillResult("Successfully added 15 persons, and 43 events to the database.", true);
-    compareTest = fillService.fill("radicalGrim", "3");
+    FillResult compareTest = new FillResult("Successfully added 15 persons and 43 events to the database.", true);
+    FillResult actual = fillService.fill("radicalGrim", "3");
 
-    assertEquals(result.getMessage(), compareTest.getMessage());
-    assertEquals(result.getSuccess(), compareTest.getSuccess());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
 
-    result = new FillResult("Successfully added 63 persons, and 187 events to the database.", true);
-    compareTest = fillService.fill("radicalGrim", "5");
+    compareTest = new FillResult("Successfully added 63 persons and 187 events to the database.", true);
+    actual = fillService.fill("radicalGrim", "5");
 
-    assertEquals(result.getMessage(), compareTest.getMessage());
-    assertEquals(result.getSuccess(), compareTest.getSuccess());
+    assertEquals(compareTest.getMessage(), actual.getMessage());
+    assertEquals(compareTest.getSuccess(), actual.getSuccess());
   }
 }
