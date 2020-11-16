@@ -1,7 +1,7 @@
 package handler;
 
 import com.sun.net.httpserver.HttpExchange;
-import service.result.ErrorResult;
+import result.ErrorResult;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

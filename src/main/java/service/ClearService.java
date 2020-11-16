@@ -2,7 +2,7 @@ package service;
 
 import DAO.DataAccessException;
 import DAO.Database;
-import service.result.ClearResult;
+import result.ClearResult;
 
 public class ClearService {
   public ClearService() {

@@ -1,5 +1,5 @@
 DAO
 model
 service
-service.request
-service.result
+request
+result

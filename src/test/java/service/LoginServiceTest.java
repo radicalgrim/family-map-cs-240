@@ -7,9 +7,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import service.request.LoadRequest;
-import service.request.LoginRequest;
-import service.result.LoginResult;
+import request.LoadRequest;
+import request.LoginRequest;
+import result.LoginResult;
 
 import static org.junit.jupiter.api.Assertions.*;
 

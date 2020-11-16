@@ -6,15 +6,10 @@ import DAO.Database;
 import DAO.UserDAO;
 import model.AuthToken;
 import model.User;
-import service.request.LoginRequest;
-import service.request.RegisterRequest;
-import service.result.FillResult;
-import service.result.LoadResult;
-import service.result.LoginResult;
-import service.result.RegisterResult;
+import request.RegisterRequest;
+import result.RegisterResult;
 
 import java.sql.Connection;
-import java.util.Objects;
 import java.util.UUID;
 
 public class RegisterService extends AncestorService {

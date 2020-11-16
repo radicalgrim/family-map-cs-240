@@ -3,12 +3,11 @@ package handler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import service.LoadService;
-import service.request.LoadRequest;
-import service.result.LoadResult;
+import request.LoadRequest;
+import result.LoadResult;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
 public class LoadHandler extends PostHandler implements HttpHandler {

@@ -1,14 +1,12 @@
 package handler;
 
-import DAO.EventDAO;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import service.EventService;
-import service.result.EventResult;
+import result.EventResult;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
 public class EventHandler extends RequestHandler implements HttpHandler {

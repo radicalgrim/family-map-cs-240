@@ -6,7 +6,7 @@ import DAO.Database;
 import DAO.EventDAO;
 import model.AuthToken;
 import model.Event;
-import service.result.EventResult;
+import result.EventResult;
 
 import java.sql.Connection;
 

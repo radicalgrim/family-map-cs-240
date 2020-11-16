@@ -1,18 +1,10 @@
 package service;
 
 import DAO.*;
-import handler.JsonSerializer;
-import model.Event;
-import model.Person;
 import model.User;
-import service.dummyData.*;
-import service.result.FillResult;
+import result.FillResult;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
-import java.util.Scanner;
-import java.util.UUID;
 
 public class FillService extends AncestorService {
 

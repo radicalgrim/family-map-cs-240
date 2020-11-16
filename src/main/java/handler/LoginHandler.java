@@ -3,12 +3,11 @@ package handler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import service.LoginService;
-import service.request.LoginRequest;
-import service.result.LoginResult;
+import request.LoginRequest;
+import result.LoginResult;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
 public class LoginHandler extends PostHandler implements HttpHandler {

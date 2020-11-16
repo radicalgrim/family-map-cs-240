@@ -1,9 +1,8 @@
 package service;
 
 import DAO.*;
-import service.request.LoadRequest;
-import service.result.ClearResult;
-import service.result.LoadResult;
+import request.LoadRequest;
+import result.LoadResult;
 
 import java.sql.Connection;
 

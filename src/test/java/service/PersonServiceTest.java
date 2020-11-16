@@ -5,12 +5,12 @@ import model.Person;
 import model.User;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import service.request.LoadRequest;
-import service.request.LoginRequest;
-import service.result.PersonResult;
-import service.result.LoginResult;
+import request.LoadRequest;
+import request.LoginRequest;
+import result.PersonResult;
+import result.LoginResult;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PersonServiceTest {
   private static PersonService personService;

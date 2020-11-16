@@ -1,15 +1,14 @@
 package service;
 
-import DAO.*;
 import model.Event;
 import model.Person;
 import model.User;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import service.request.LoadRequest;
-import service.request.LoginRequest;
-import service.result.ClearResult;
-import service.result.LoginResult;
+import request.LoadRequest;
+import request.LoginRequest;
+import result.ClearResult;
+import result.LoginResult;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

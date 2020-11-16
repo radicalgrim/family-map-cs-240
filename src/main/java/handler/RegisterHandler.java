@@ -2,14 +2,12 @@ package handler;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import service.FillService;
 import service.RegisterService;
-import service.request.RegisterRequest;
-import service.result.RegisterResult;
+import request.RegisterRequest;
+import result.RegisterResult;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
 public class RegisterHandler extends PostHandler implements HttpHandler {

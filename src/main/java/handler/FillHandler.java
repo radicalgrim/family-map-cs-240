@@ -3,10 +3,9 @@ package handler;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import service.FillService;
-import service.result.FillResult;
+import result.FillResult;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 
 public class FillHandler extends RequestHandler implements HttpHandler {
